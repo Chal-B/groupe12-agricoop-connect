@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --bg: #f6f2e7;
+  --paper: #ffffff;
+  --paper-line: #e1d9c4;
+  --ink: #241f16;
+  --ink-soft: #6b6252;
+  --ink-faint: #9c9280;
+  --green-900: #1f3a2a;
+  --green-700: #33553c;
+  --green-500: #4c7a54;
+  --green-100: #e3ece0;
+  --ocre-600: #b4741f;
+  --ocre-100: #f6e7ce;
+  --terra-700: #8f3b24;
+  --terra-100: #f5ded4;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
