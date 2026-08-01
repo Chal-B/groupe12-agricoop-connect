@@ -19,7 +19,6 @@
    Vérifiez votre travail : ouvrez functions.test.html dans le navigateur.
    ===================================================================== */
 
-
 /* [Dev FS1 — Connexion — niveau S7 : conditions simples]
    Vérifie qu'un formulaire de connexion est valide avant de l'envoyer au
    serveur (module Authentification, nouveau).
@@ -35,7 +34,6 @@ function validerFormulaireLogin(donnees) {
   // TODO : à compléter
 }
 
-
 /* [Dev FS1 — Tableau de bord — niveau S7 : boucle + condition]
    Compte le nombre de jours (parmi les entrées reçues) où le volume
    livré dépasse un seuil donné — utile pour repérer les pics d'activité.
@@ -47,7 +45,6 @@ function compterJoursActifs(livraisonsParJour, seuil) {
   // TODO : à compléter
 }
 
-
 /* [Dev FS2 — Membres — niveau S8 : tableau .filter]
    Garde uniquement les membres ayant un statut de cotisation donné.
    Paramètres : membres (tableau d'objets), statut (chaîne, ex. "En retard")
@@ -56,8 +53,8 @@ function compterJoursActifs(livraisonsParJour, seuil) {
                 .statut_cotisation est égal au statut demandé. */
 function filtrerMembresParStatut(membres, statut) {
   // TODO : à compléter
+  return membres.filter((membre) => membre.statut_cotisation === statut);
 }
-
 
 /* [Dev FS2 — Membres — niveau S8 : tableau .filter + méthode de chaîne]
    Garde uniquement les membres dont le nom contient le texte recherché
@@ -68,8 +65,16 @@ function filtrerMembresParStatut(membres, statut) {
    Astuce     : "Jean Mabiala".toLowerCase().includes("jean") -> true */
 function rechercherMembreParNom(membres, texte) {
   // TODO : à compléter
-}
+  if (!texte || texte.trim() === "") {
+    return membres;
+  }
 
+  const texteMinuscule = texte.toLowerCase();
+
+  return membres.filter((membre) =>
+    membre.nom.toLowerCase().includes(texteMinuscule),
+  );
+}
 
 /* [Dev FS2 — Membres — niveau S7 : conditions simples — NOUVEAU]
    Vérifie qu'un formulaire de création de nouveau membre est valide
@@ -84,8 +89,30 @@ function rechercherMembreParNom(membres, texte) {
                                             "Le contact est obligatoire."]} */
 function validerFormulaireNouveauMembre(donnees) {
   // TODO : à compléter
-}
+  const erreurs = [];
 
+  if (!donnees.nom || donnees.nom.trim() === "") {
+    erreurs.push("Le nom est obligatoire.");
+  }
+
+  if (!donnees.prenom || donnees.prenom.trim() === "") {
+    erreurs.push("Le prénom est obligatoire.");
+  }
+
+  if (!donnees.village || donnees.village.trim() === "") {
+    erreurs.push("Le village est obligatoire.");
+  }
+
+  if (!donnees.contact || donnees.contact.trim() === "") {
+    erreurs.push("Le contact est obligatoire.");
+  }
+
+  // Si le tableau d'erreurs est vide, donc le formulaire est valide
+  return {
+    valide: erreurs.length === 0,
+    erreurs: erreurs,
+  };
+}
 
 /* [Dev FS3 — Livraisons — niveau S7 : conditions imbriquées]
    Vérifie qu'un formulaire d'enregistrement de livraison est valide.
@@ -101,7 +128,6 @@ function validerFormulaireLivraison(donnees) {
   // TODO : à compléter
 }
 
-
 /* [Dev FS3 — Livraisons — niveau S8 : tableau .sort]
    Trie une liste de livraisons par date, de la plus récente à la plus
    ancienne (utilisé par un bouton "trier" sur la page Livraisons).
@@ -112,7 +138,6 @@ function validerFormulaireLivraison(donnees) {
 function trierLivraisonsParDate(livraisons) {
   // TODO : à compléter
 }
-
 
 /* [Dev FS4 — Paiements — niveau S7 : conditions imbriquées]
    Vérifie qu'un formulaire d'enregistrement de paiement est valide
@@ -129,7 +154,6 @@ function validerFormulairePaiement(donnees) {
   // TODO : à compléter
 }
 
-
 /* [Dev FS4 — Paiements — niveau S7/S8 : boucle + accumulateur]
    Calcule le montant total d'une liste de paiements, pour l'indicateur
    affiché en haut de la page Paiements.
@@ -139,7 +163,6 @@ function validerFormulairePaiement(donnees) {
 function calculerTotalPaiements(paiements) {
   // TODO : à compléter
 }
-
 
 /* [Dev FS5 — Ventes & Stock — niveau S7/S8 : condition sur un nombre]
    Retourne un texte de badge selon la quantité disponible d'une culture.
@@ -153,7 +176,6 @@ function getBadgeStock(quantiteDisponible) {
   // TODO : à compléter
 }
 
-
 /* [Dev FS5 — fonction transverse — niveau S8 : propriétés d'objet + formatage]
    Met en forme un montant en FCFA, utilisée sur presque toutes les pages
    (tableau de bord, membres, livraisons, paiements).
@@ -164,7 +186,6 @@ function formaterMontant(montant) {
   // TODO : à compléter
 }
 
-
 /* [Dev FS6 — Statistiques — niveau S8 : tableau .sort]
    Trie le classement des membres par volume total, du plus gros
    producteur au plus petit (ordre décroissant).
@@ -173,7 +194,6 @@ function formaterMontant(montant) {
 function trierClassementParVolume(classement) {
   // TODO : à compléter
 }
-
 
 /* [Dev FS6 — fonction transverse — niveau S8 : propriétés d'objet + formatage]
    Met en forme une date au format "AAAA-MM-JJ" en "JJ/MM/AAAA", utilisée
@@ -184,7 +204,6 @@ function trierClassementParVolume(classement) {
 function formaterDate(dateStr) {
   // TODO : à compléter
 }
-
 
 /* NE PAS MODIFIER — rend vos fonctions accessibles à main.js et aux tests */
 if (typeof module !== "undefined") {
