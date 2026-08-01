@@ -1,20 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap");
-
+/* ==========================================================================
+   1. VARIABLES & REINITIALISATION
+   ========================================================================== */
 :root {
-  --bg: #f6f2e7;
-  --paper: #ffffff;
-  --paper-line: #e1d9c4;
-  --ink: #241f16;
-  --ink-soft: #6b6252;
-  --ink-faint: #9c9280;
-  --green-900: #1f3a2a;
-  --green-700: #33553c;
-  --green-500: #4c7a54;
-  --green-100: #e3ece0;
-  --ocre-600: #b4741f;
-  --ocre-100: #f6e7ce;
-  --terra-700: #8f3b24;
-  --terra-100: #f5ded4;
+  --bg-main: #fcf9f2;
+  --bg-card: #f9f4ea;
+  --bg-sidebar: #1b382b;
+  --text-dark: #2c3e35;
+  --text-muted: #8c857b;
+  --text-light: #ffffff;
+  --primary-green: #2d4f3e;
+  --border-color: #e5dec9;
+  --badge-warning-bg: #fdf3eb;
+  --badge-warning-text: #b85d3b;
+  --badge-warning-border: #f3d4c3;
+  --badge-success-bg: #eaf5ee;
+  --badge-success-text: #2e7d4e;
+  --badge-success-border: #b8e2c8;
 }
 
 * {
@@ -24,53 +25,225 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
-  margin: 10px 30px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 2rem 3rem;
 }
 
-h1,
-h2 {
-  font-family: "Fraunces", serif;
-  font-weight: 500;
+.page-header {
+  margin-bottom: 1.5rem;
 }
 
-/* Main */
+.page-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 1200px;
+}
+
+/* Filtre */
 .page-nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 
-/* Grid */
-.grid {
+#filtre-statut,
+#champ-recherche-membre {
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+#filtre-statut {
+  width: 180px;
+  cursor: pointer;
+}
+
+#champ-recherche-membre {
+  flex: 1;
+}
+
+#filtre-statut:focus,
+#champ-recherche-membre:focus {
+  border-color: var(--primary-green);
+}
+
+/* Liste des membres */
+.page-liste-membres {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+#liste-membres {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Structure d'une ligne d'élément */
+.membre-identite {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.membre-identite:last-child {
+  border-bottom: none;
+}
+
+.membre-id {
+  width: 60px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.membre-identite > div {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: 2fr 2fr 2fr 1.5fr 1.5fr;
+  align-items: center;
+  width: 100%;
 }
 
-.col-span-1 {
-  grid-column: span 1;
+.membre-prenom,
+.membre-nom {
+  display: inline;
+  font-weight: 600;
 }
 
-.col-span-2 {
-  grid-column: span 2;
+.membre-prenom::after {
+  content: " ";
 }
 
-.col-span-3 {
-  grid-column: span 3;
+.membre-village,
+.membre-contact {
+  color: #555555;
 }
 
-.col-span-4 {
-  grid-column: span 4;
+.membre-solde {
+  font-weight: 700;
+  text-align: right;
+  color: var(--text-dark);
 }
 
-.col-span-6 {
-  grid-column: span 6;
+/* Badges de statut */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+  width: fit-content;
 }
 
-.col-span-12 {
-  grid-column: span 12;
+/* Styles pour les valeurs injectées dynamiquement */
+.badge:contains("En retard"),
+.badge[data-statut="En retard"] {
+  background-color: var(--badge-warning-bg);
+  color: var(--badge-warning-text);
+  border: 1px solid var(--badge-warning-border);
 }
 
-/* Media Queries: Tablette && Laptop */
-@media screen and (width >= 768px) {
+.badge:contains("À jour"),
+.badge[data-statut="À jour"] {
+  background-color: var(--badge-success-bg);
+  color: var(--badge-success-text);
+  border: 1px solid var(--badge-success-border);
 }
 
-@media screen and (width >= 1024px) {
+/* Formulaire de nouveau membre */
+.page-nouveau-membre {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.page-nouveau-membre h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--primary-green);
+}
+
+#form-nouveau-membre {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.champ label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.champ input,
+.champ select {
+  padding: 0.6rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.champ button {
+  background-color: var(--primary-green);
+  color: var(--text-light);
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.champ button:hover {
+  background-color: #1f392c;
+}
+
+/* Notifications d'erreur / succès */
+#erreurs-nouveau-membre,
+#message-succes-nouveau-membre {
+  padding: 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+#erreurs-nouveau-membre {
+  background-color: var(--badge-warning-bg);
+  color: var(--badge-warning-text);
+  border: 1px solid var(--badge-warning-border);
+}
+
+#message-succes-nouveau-membre {
+  background-color: var(--badge-success-bg);
+  color: var(--badge-success-text);
+  border: 1px solid var(--badge-success-border);
 }
