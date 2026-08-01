@@ -4,55 +4,236 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AgriCoop Connect — Statistiques</title>
+  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="../sidebar.css">
   <link rel="stylesheet" href="statistiques.css">
 </head>
 <body>
 
-  <!-- NAVIGATION — TODO (Dev FS6) -->
+  <!-- =====================================================================
+       NAVIGATION — TODO (Dev FS6)
+       Construire un menu de navigation vers les 8 pages du site.
+       ===================================================================== -->
+  <div class="app">
+    <aside class="sidebar" aria-label="Navigation">
+      <div class="sidebar-marque">
+        <i data-lucide="layout-grid" aria-hidden="true"></i>
+        <span>AgriCoop Connect</span>
+      </div>
 
-  <main>
-    <!-- =====================================================================
-         CLASSEMENT DES MEMBRES — TODO (Dev FS6)
-         Le contenu (liste <li>) est injecté par main.js.
+      <nav class="sidebar-nav" aria-label="Navigation principale">
+        <div class="nav-groupe">
+          <p class="nav-titre">Principal</p>
+          <ul class="nav-liste">
+            <li>
+              <a href="../dashboard/dashboard.html">
+                <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                Tableau de bord
+              </a>
+            </li>
+            <li>
+              <a href="../membres/membres.html">
+                <i data-lucide="users" aria-hidden="true"></i>
+                Membres
+              </a>
+            </li>
+            <li>
+              <a href="../livraisons/livraisons.html">
+                <i data-lucide="truck" aria-hidden="true"></i>
+                Livraisons
+              </a>
+            </li>
+            <li>
+              <a href="../paiements/paiements.html">
+                <i data-lucide="credit-card" aria-hidden="true"></i>
+                Paiements
+              </a>
+            </li>
+            <li>
+              <a href="../ventes/ventes.html">
+                <i data-lucide="chart-column" aria-hidden="true"></i>
+                Ventes &amp; Stock
+              </a>
+            </li>
+            <li>
+              <a href="statistiques.html" aria-current="page">
+                <i data-lucide="trending-up" aria-hidden="true"></i>
+                Statistiques
+              </a>
+            </li>
+          </ul>
+        </div>
 
-         *** NE PAS MODIFIER l'id ci-dessous — main.js l'utilise ***
-         ===================================================================== -->
-    <ol id="classement-membres"></ol>
+        <div class="nav-groupe">
+          <p class="nav-titre">Administration</p>
+          <ul class="nav-liste">
+            <li>
+              <a href="../comptes/comptes.html">
+                <i data-lucide="settings" aria-hidden="true"></i>
+                Comptes
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-    <!-- =====================================================================
-         TABLEAU PAR CULTURE — TODO (Dev FS6)
+      <div class="sidebar-session">
+        <div class="session-carte">
+          <div class="session-haut">
+            <div class="session-avatar" aria-hidden="true">
+              <i data-lucide="user"></i>
+            </div>
+            <div>
+              <span class="session-role">Administrateur</span>
+              <p id="utilisateur-connecte">Non connecté(e)</p>
+            </div>
+          </div>
+          <div class="session-bande" aria-hidden="true"></div>
+          <button type="button" id="btn-deconnexion">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+            Déconnexion
+          </button>
+        </div>
+      </div>
+    </aside>
 
-         *** NE PAS MODIFIER l'id ci-dessous — main.js l'utilise ***
-         ===================================================================== -->
-    <table>
-      <thead>
-        <!-- TODO (Dev FS6) : en-têtes (Culture, Volume total, Valeur totale) -->
-      </thead>
-      <tbody id="tableau-cultures"></tbody>
-    </table>
+    <main class="contenu">
+      <header class="intro">
+        <p class="intro-eyebrow">COMAKI · Kintélé</p>
+        <h1>Statistiques</h1>
+        <p>Rapport partenaire, volumes par culture, classement et top acheteur.</p>
+      </header>
 
-    <!-- =====================================================================
-         TOP ACHETEUR — TODO (Dev FS6)
+      <!-- =====================================================================
+           RAPPORT BAILLEUR — TODO (Dev FS6 + DM)
+           Le dev structure la section, le DM fournit les textes d'habillage.
+           Les valeurs chiffrées sont injectées par main.js.
 
-         *** NE PAS MODIFIER l'id ci-dessous — main.js l'utilise ***
-         ===================================================================== -->
-    <div id="top-acheteur"></div>
+           *** NE PAS MODIFIER les id ci-dessous — main.js les utilise ***
+           ===================================================================== -->
+      <section id="rapport-bailleur-contenu" class="panneau panneau-points panneau-rapport" aria-labelledby="titre-rapport">
+        <header class="panneau-entete">
+          <span class="panneau-icone" aria-hidden="true">
+            <i data-lucide="file-bar-chart"></i>
+          </span>
+          <div>
+            <h2 id="titre-rapport">Rapport partenaire</h2>
+            <p class="note">
+              Synthèse anonymisée pour le partenaire (aucun nom de membre — RM-5).
+            </p>
+          </div>
+        </header>
 
-    <!-- =====================================================================
-         RAPPORT BAILLEUR — TODO (Dev FS6 + DM)
-         Le dev structure la section, le DM fournit les textes d'habillage.
-         Les valeurs chiffrées sont injectées par main.js.
+        <dl class="indicateurs">
+          <div class="indicateur">
+            <dt>
+              <i data-lucide="package" aria-hidden="true"></i>
+              Volume total
+            </dt>
+            <dd><span id="rb-volume"></span></dd>
+          </div>
+          <div class="indicateur">
+            <dt>
+              <i data-lucide="banknote" aria-hidden="true"></i>
+              Montant des ventes
+            </dt>
+            <dd><span id="rb-montant"></span></dd>
+          </div>
+          <div class="indicateur">
+            <dt>
+              <i data-lucide="percent" aria-hidden="true"></i>
+              Taux de régularité
+            </dt>
+            <dd><span id="rb-taux"></span></dd>
+          </div>
+          <div class="indicateur">
+            <dt>
+              <i data-lucide="users" aria-hidden="true"></i>
+              Membres actifs
+            </dt>
+            <dd><span id="rb-membres"></span></dd>
+          </div>
+        </dl>
+      </section>
 
-         *** NE PAS MODIFIER les id ci-dessous — main.js les utilise ***
-         ===================================================================== -->
-    <section id="rapport-bailleur-contenu">
-      <span id="rb-volume"></span>
-      <span id="rb-montant"></span>
-      <span id="rb-taux"></span>
-      <span id="rb-membres"></span>
-    </section>
-  </main>
+      <section class="panneau panneau-carnet" aria-labelledby="titre-cultures">
+        <header class="panneau-entete">
+          <span class="panneau-icone" aria-hidden="true">
+            <i data-lucide="wheat"></i>
+          </span>
+          <div>
+            <h2 id="titre-cultures">Volumes par culture</h2>
+            <p>Livraisons cumulées et valeur des ventes</p>
+          </div>
+        </header>
+        <!-- =====================================================================
+             TABLEAU PAR CULTURE — TODO (Dev FS6)
 
+             *** NE PAS MODIFIER l'id ci-dessous — main.js l'utilise ***
+             ===================================================================== -->
+        <div class="tableau-wrap">
+          <table>
+            <thead>
+              <!-- TODO (Dev FS6) : en-têtes (Culture, Volume total, Valeur totale) -->
+              <tr>
+                <th scope="col">N°</th>
+                <th scope="col">Culture</th>
+                <th scope="col">Volume total</th>
+                <th scope="col">Valeur totale</th>
+              </tr>
+            </thead>
+            <tbody id="tableau-cultures"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="deux-colonnes">
+        <section class="panneau panneau-carnet" aria-labelledby="titre-classement">
+          <header class="panneau-entete">
+            <span class="panneau-icone" aria-hidden="true">
+              <i data-lucide="trophy"></i>
+            </span>
+            <div>
+              <h2 id="titre-classement">Classement des membres</h2>
+              <p>Volume total livré à la coopérative</p>
+            </div>
+          </header>
+          <!-- =====================================================================
+               CLASSEMENT DES MEMBRES — TODO (Dev FS6)
+               Le contenu (liste <li>) est injecté par main.js.
+
+               *** NE PAS MODIFIER l'id ci-dessous — main.js l'utilise ***
+               ===================================================================== -->
+          <ol id="classement-membres"></ol>
+        </section>
+
+        <section class="panneau panneau-carnet panneau-top" aria-labelledby="titre-top">
+          <header class="panneau-entete">
+            <span class="panneau-icone panneau-icone-or" aria-hidden="true">
+              <i data-lucide="store"></i>
+            </span>
+            <div>
+              <h2 id="titre-top">Top acheteur</h2>
+              <p>Partenaire commercial le plus actif</p>
+            </div>
+          </header>
+          <!-- =====================================================================
+               TOP ACHETEUR — TODO (Dev FS6)
+
+               *** NE PAS MODIFIER l'id ci-dessous — main.js l'utilise ***
+               ===================================================================== -->
+          <ol class="liste-rang liste-rang-simple" aria-label="Top acheteur">
+            <li id="top-acheteur"></li>
+          </ol>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
   <!-- NE PAS MODIFIER — scripts de connexion au backend -->
   <script src="../functions.js"></script>
   <script src="../main.js"></script>

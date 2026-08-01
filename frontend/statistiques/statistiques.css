@@ -1,0 +1,277 @@
+/* Page Statistiques — même logique que Ventes : papier autour, données opaques */
+
+.intro {
+  margin-bottom: var(--espace-lg);
+}
+
+.intro-eyebrow {
+  margin-bottom: var(--espace-xs);
+  font-size: var(--texte-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sidebar-primary);
+}
+
+.intro h1 {
+  margin-bottom: var(--espace-xs);
+  font-size: var(--texte-xl);
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.intro > p {
+  margin: 0;
+  font-size: var(--texte-base);
+  color: var(--muted-foreground);
+}
+
+.panneau-entete {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espace-base);
+  margin-bottom: var(--espace-base);
+}
+
+.panneau-entete h2 {
+  margin: 0 0 var(--espace-xs);
+  font-size: var(--texte-md);
+  color: var(--foreground);
+}
+
+.panneau-entete p,
+.panneau-entete .note {
+  margin: 0;
+  font-size: var(--texte-sm);
+  color: var(--muted-foreground);
+  font-weight: 400;
+}
+
+.panneau-icone {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--rayon);
+  background: var(--primaire-clair);
+  color: var(--primaire);
+  flex-shrink: 0;
+}
+
+.panneau-icone svg {
+  width: 20px;
+  height: 20px;
+}
+
+.panneau-icone-or {
+  background: hsl(36 40% 88%);
+  color: hsl(36 50% 35%);
+}
+
+.deux-colonnes {
+  display: grid;
+  grid-template-columns: 1.35fr 0.9fr;
+  gap: var(--espace-lg);
+  margin-bottom: var(--espace-2xl);
+  align-items: stretch;
+}
+
+.deux-colonnes .panneau {
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+/* Blocs de données : fond opaque (comme le tableau Ventes) */
+.bloc-donnees,
+#classement-membres,
+.liste-rang-simple,
+.tableau-wrap table {
+  background: hsl(42 45% 99%);
+  border: 1px solid var(--border);
+  border-radius: var(--rayon-carte);
+  overflow: hidden;
+}
+
+.tableau-wrap {
+  overflow-x: auto;
+}
+
+.tableau-wrap thead th {
+  background: var(--muted);
+}
+
+.tableau-wrap tbody td,
+.tableau-wrap tbody tr::before {
+  background-color: hsl(42 45% 99%);
+}
+
+.tableau-wrap tbody tr:hover td,
+.tableau-wrap tbody tr:hover::before {
+  background-color: var(--muted);
+}
+
+#classement-membres {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: rang;
+  flex: 1;
+}
+
+#classement-membres li {
+  counter-increment: rang;
+  display: flex;
+  align-items: center;
+  gap: var(--espace-md);
+  padding: var(--espace-md) var(--espace-base);
+  background: hsl(42 45% 99%);
+  border-bottom: 1px solid var(--border);
+  font-size: var(--texte-base);
+  color: var(--foreground);
+}
+
+#classement-membres li:last-child {
+  border-bottom: 0;
+}
+
+#classement-membres li:hover {
+  background: var(--muted);
+}
+
+#classement-membres li::before {
+  content: counter(rang);
+  display: grid;
+  place-items: center;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  border-radius: var(--rayon);
+  background: var(--muted);
+  color: var(--muted-foreground);
+  font-size: var(--texte-xs);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+#classement-membres li:nth-child(1)::before {
+  background: var(--sidebar-primary);
+  color: var(--sidebar-primary-foreground);
+}
+
+#classement-membres li:nth-child(2)::before {
+  background: hsl(38 12% 72%);
+  color: var(--foreground);
+}
+
+#classement-membres li:nth-child(3)::before {
+  background: hsl(28 35% 72%);
+  color: var(--foreground);
+}
+
+#classement-membres li:nth-child(1) {
+  background: hsl(36 50% 94%);
+}
+
+.liste-rang-simple {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#top-acheteur {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-md);
+  margin: 0;
+  padding: var(--espace-md) var(--espace-base);
+  font-size: var(--texte-base);
+  font-weight: 500;
+  color: var(--foreground);
+  background: hsl(36 50% 94%);
+}
+
+#top-acheteur::before {
+  content: "1";
+  display: grid;
+  place-items: center;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  border-radius: var(--rayon);
+  background: var(--sidebar-primary);
+  color: var(--sidebar-primary-foreground);
+  font-size: var(--texte-xs);
+  font-weight: 700;
+}
+
+#top-acheteur:empty::after {
+  content: "En attente des données…";
+  color: var(--muted-foreground);
+  font-weight: 400;
+}
+
+.indicateurs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--espace-base);
+  margin: 0;
+}
+
+.indicateur {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-sm);
+  padding: var(--espace-base);
+  background: hsl(42 45% 99%);
+  border: 1px solid var(--border);
+  border-radius: var(--rayon-carte);
+}
+
+.indicateur dt {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-sm);
+  margin: 0;
+  font-size: var(--texte-sm);
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+.indicateur dt svg {
+  width: 15px;
+  height: 15px;
+  color: var(--sidebar-primary);
+  flex-shrink: 0;
+}
+
+.indicateur dd {
+  margin: 0;
+  font-size: var(--texte-xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 1100px) {
+  .indicateurs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .deux-colonnes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .deux-colonnes,
+  .indicateurs {
+    grid-template-columns: 1fr;
+  }
+
+  table {
+    min-width: 480px;
+  }
+}
