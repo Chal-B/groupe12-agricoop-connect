@@ -8,11 +8,11 @@
   </head>
   <body>
     <!-- NAVIGATION — TODO (Dev FS2) -->
+    <header class="page-header">
+      <h1>Membres</h1>
+    </header>
 
     <main>
-      <header class="page-header">
-        <h1>Membres</h1>
-      </header>
       <!-- =====================================================================
          FILTRES — TODO (Dev FS2)
          Construire une zone de filtrage : un sélecteur de statut et un champ
@@ -20,7 +20,7 @@
 
          *** NE PAS MODIFIER les id ci-dessous — main.js les utilise ***
          ===================================================================== -->
-      <section class="page-nav">
+      <div class="page-nav">
         <select id="filtre-statut">
           <option value="">Tous</option>
           <option value="À jour">À jour</option>
@@ -32,7 +32,7 @@
           id="champ-recherche-membre"
           placeholder="Rechercher un membre..."
         />
-      </section>
+      </div>
       <!-- =====================================================================
          LISTE DES MEMBRES — TODO (Dev FS2)
          Le contenu est injecté par main.js. Le dev doit structurer le
@@ -40,7 +40,7 @@
 
          *** NE PAS MODIFIER l'id ci-dessous — main.js l'utilise ***
          ===================================================================== -->
-      <section class="page-liste-membres">
+      <div class="page-liste-membres">
         <div id="liste-membres">
           <div class="membre-identite">
             <span class="membre-id"></span>
@@ -53,7 +53,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       <!-- =====================================================================
          NOUVEAU MEMBRE — TODO (Dev FS2)
@@ -64,7 +64,7 @@
 
          *** NE PAS MODIFIER les id ci-dessous — main.js les utilise ***
          ===================================================================== -->
-      <section class="page-nouveau-membre">
+      <div class="page-nouveau-membre">
         <h2>Nouveau membre</h2>
         <form id="form-nouveau-membre">
           <div class="champ">
@@ -93,7 +93,7 @@
             <button type="submit">Créer le membre</button>
           </div>
         </form>
-      </section>
+      </div>
 
       <div id="erreurs-nouveau-membre" hidden></div>
       <div id="message-succes-nouveau-membre" hidden></div>
