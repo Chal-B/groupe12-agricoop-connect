@@ -1,0 +1,143 @@
+/* Page Ventes — styles spécifiques (tokens via base.css) */
+
+.intro {
+  margin-bottom: var(--espace-lg);
+}
+
+.intro h1 {
+  margin-bottom: var(--espace-xs);
+  font-size: var(--texte-xl);
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.intro > p {
+  margin: 0;
+  font-size: var(--texte-base);
+  color: var(--muted-foreground);
+}
+
+.panneau h2 {
+  margin: 0 0 var(--espace-base);
+  font-size: var(--texte-md);
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+#cartes-stock {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--espace-lg);
+}
+
+#cartes-stock .card {
+  position: relative;
+  background: hsl(42 45% 99%);
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+
+#cartes-stock .card h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-sm);
+  margin-bottom: var(--espace-sm);
+  padding-right: 90px;
+  font-size: var(--texte-base);
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+/* Icône feuille (maquette) — main.js n’injecte pas d’icône */
+#cartes-stock .card h3::before {
+  content: "";
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  background-color: var(--sidebar-primary);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+}
+
+#cartes-stock .card p {
+  margin-bottom: var(--espace-md);
+  font-size: var(--texte-md);
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+#cartes-stock .card .badge {
+  position: absolute;
+  top: var(--espace-lg);
+  right: var(--espace-lg);
+}
+
+.barre-stock-fond {
+  height: 6px;
+  margin-top: 0;
+}
+
+.filtres-ventes.filtres {
+  margin-bottom: var(--espace-base);
+}
+
+.filtre-vide {
+  margin-top: var(--espace-base);
+  font-size: var(--texte-sm);
+  color: var(--muted-foreground);
+}
+
+.panneau-carnet .tableau-wrap table {
+  background: hsl(42 45% 99%);
+  border: 1px solid var(--border);
+}
+
+.panneau-carnet .tableau-wrap thead th {
+  background: var(--muted);
+}
+
+.panneau-carnet .tableau-wrap tbody td,
+.panneau-carnet .tableau-wrap tbody tr::before {
+  background-color: hsl(42 45% 99%);
+}
+
+.panneau-carnet .tableau-wrap tbody tr:hover td,
+.panneau-carnet .tableau-wrap tbody tr:hover::before {
+  background-color: var(--muted);
+}
+
+tbody tr[hidden] {
+  display: none;
+}
+
+tbody tr[hidden]::before {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  #cartes-stock {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  #cartes-stock {
+    grid-template-columns: 1fr;
+  }
+
+  .filtres-ventes.filtres {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filtres-ventes.filtres input {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  table {
+    min-width: 520px;
+  }
+}

@@ -4,38 +4,227 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AgriCoop Connect — Ventes & Stock</title>
+  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="../sidebar.css">
   <link rel="stylesheet" href="ventes.css">
 </head>
 <body>
 
-  <!-- NAVIGATION — TODO (Dev FS5) -->
+  <!-- =====================================================================
+       NAVIGATION — TODO (Dev FS5)
+       Construire un menu de navigation vers les 8 pages du site.
+       ===================================================================== -->
+  <div class="app">
+    <aside class="sidebar" aria-label="Navigation">
+      <div class="sidebar-marque">
+        <i data-lucide="layout-grid" aria-hidden="true"></i>
+        <span>AgriCoop Connect</span>
+      </div>
 
-  <main>
-    <!-- =====================================================================
-         CARTES STOCK — TODO (Dev FS5)
-         Le contenu est injecté par main.js (une carte par culture avec
-         badge et barre de remplissage). Le dev stylise .card, .badge,
-         .barre-stock-fond, .barre-stock-remplissage.
+      <nav class="sidebar-nav" aria-label="Navigation principale">
+        <div class="nav-groupe">
+          <p class="nav-titre">Principal</p>
+          <ul class="nav-liste">
+            <li>
+              <a href="../dashboard/dashboard.html">
+                <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                Tableau de bord
+              </a>
+            </li>
+            <li>
+              <a href="../membres/membres.html">
+                <i data-lucide="users" aria-hidden="true"></i>
+                Membres
+              </a>
+            </li>
+            <li>
+              <a href="../livraisons/livraisons.html">
+                <i data-lucide="truck" aria-hidden="true"></i>
+                Livraisons
+              </a>
+            </li>
+            <li>
+              <a href="../paiements/paiements.html">
+                <i data-lucide="credit-card" aria-hidden="true"></i>
+                Paiements
+              </a>
+            </li>
+            <li>
+              <a href="ventes.html" aria-current="page">
+                <i data-lucide="chart-column" aria-hidden="true"></i>
+                Ventes &amp; Stock
+              </a>
+            </li>
+            <li>
+              <a href="../statistiques/statistiques.html">
+                <i data-lucide="trending-up" aria-hidden="true"></i>
+                Statistiques
+              </a>
+            </li>
+          </ul>
+        </div>
 
-         *** NE PAS MODIFIER l'id ci-dessous — main.js l'utilise ***
-         ===================================================================== -->
-    <div id="cartes-stock"></div>
+        <div class="nav-groupe">
+          <p class="nav-titre">Administration</p>
+          <ul class="nav-liste">
+            <li>
+              <a href="../comptes/comptes.html">
+                <i data-lucide="settings" aria-hidden="true"></i>
+                Comptes
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-    <!-- =====================================================================
-         TABLEAU DES VENTES — TODO (Dev FS5)
+      <div class="sidebar-session">
+        <div class="session-carte">
+          <div class="session-haut">
+            <div class="session-avatar" aria-hidden="true">
+              <i data-lucide="user"></i>
+            </div>
+            <div>
+              <span class="session-role">Administrateur</span>
+              <p id="utilisateur-connecte">Non connecté(e)</p>
+            </div>
+          </div>
+          <div class="session-bande" aria-hidden="true"></div>
+          <button type="button" id="btn-deconnexion">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+            Déconnexion
+          </button>
+        </div>
+      </div>
+    </aside>
 
-         *** NE PAS MODIFIER l'id ci-dessous — main.js l'utilise ***
-         ===================================================================== -->
-    <table>
-      <thead>
-        <!-- TODO (Dev FS5) : en-têtes (Acheteur, Culture, Quantité, Prix/kg) -->
-      </thead>
-      <tbody id="liste-ventes"></tbody>
-    </table>
-  </main>
+    <main class="contenu">
+      <header class="intro">
+        <h1>Ventes &amp; Stock</h1>
+        <p>Suivez les stocks disponibles et les ventes réalisées.</p>
+      </header>
 
+      <section class="panneau panneau-points" aria-labelledby="titre-stock">
+        <h2 id="titre-stock">Stock disponible</h2>
+
+        <!-- =====================================================================
+             CARTES STOCK — TODO (Dev FS5)
+             Le contenu est injecté par main.js (une carte par culture avec
+             badge et barre de remplissage). Le dev stylise .card, .badge,
+             .barre-stock-fond, .barre-stock-remplissage.
+
+             *** NE PAS MODIFIER l'id ci-dessous — main.js l'utilise ***
+             ===================================================================== -->
+        <div id="cartes-stock"></div>
+      </section>
+
+      <section class="panneau panneau-carnet" aria-labelledby="titre-ventes">
+        <h2 id="titre-ventes">Historique des ventes</h2>
+
+        <div class="filtres filtres-ventes">
+          <select id="filtre-culture" aria-label="Filtrer par culture">
+            <option value="">Toutes les cultures</option>
+            <option value="Manioc">Manioc</option>
+            <option value="Maïs">Maïs</option>
+            <option value="Arachide">Arachide</option>
+          </select>
+          <input
+            type="search"
+            id="filtre-acheteur"
+            placeholder="Rechercher un acheteur…"
+            aria-label="Rechercher un acheteur"
+          >
+        </div>
+
+        <!-- =====================================================================
+             TABLEAU DES VENTES — TODO (Dev FS5)
+
+             *** NE PAS MODIFIER l'id ci-dessous — main.js l'utilise ***
+             ===================================================================== -->
+        <div class="tableau-wrap">
+          <table>
+            <thead>
+              <!-- TODO (Dev FS5) : en-têtes (Acheteur, Culture, Quantité, Prix/kg) -->
+              <tr>
+                <th scope="col">N°</th>
+                <th scope="col">Acheteur</th>
+                <th scope="col">Culture</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix/kg</th>
+              </tr>
+            </thead>
+            <tbody id="liste-ventes"></tbody>
+          </table>
+          <p id="filtre-vide" class="filtre-vide" hidden>Aucune vente ne correspond aux filtres.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
   <!-- NE PAS MODIFIER — scripts de connexion au backend -->
   <script src="../functions.js"></script>
   <script src="../main.js"></script>
+  <script>
+    (function () {
+      var liste = document.getElementById("liste-ventes");
+      var selectCulture = document.getElementById("filtre-culture");
+      var champAcheteur = document.getElementById("filtre-acheteur");
+      var messageVide = document.getElementById("filtre-vide");
+      if (!liste || !selectCulture || !champAcheteur) return;
+
+      function appliquerFiltres() {
+        var culture = selectCulture.value.trim().toLowerCase();
+        var acheteur = champAcheteur.value.trim().toLowerCase();
+        var lignes = liste.querySelectorAll("tr");
+        var visibles = 0;
+
+        for (var i = 0; i < lignes.length; i++) {
+          var cellules = lignes[i].querySelectorAll("td");
+          if (cellules.length < 2) continue;
+
+          var texteAcheteur = (cellules[0].textContent || "").toLowerCase();
+          var texteCulture = (cellules[1].textContent || "").toLowerCase();
+          var okCulture = !culture || texteCulture === culture;
+          var okAcheteur = !acheteur || texteAcheteur.indexOf(acheteur) !== -1;
+          var visible = okCulture && okAcheteur;
+
+          lignes[i].hidden = !visible;
+          if (visible) visibles += 1;
+        }
+
+        if (messageVide) {
+          messageVide.hidden = !(lignes.length > 0 && visibles === 0);
+        }
+      }
+
+      selectCulture.addEventListener("change", appliquerFiltres);
+      champAcheteur.addEventListener("input", appliquerFiltres);
+
+      var observateur = new MutationObserver(appliquerFiltres);
+      observateur.observe(liste, { childList: true });
+
+      function styliserBadgesStock() {
+        var badges = document.querySelectorAll("#cartes-stock .badge");
+        for (var i = 0; i < badges.length; i++) {
+          var texte = (badges[i].textContent || "").trim();
+          badges[i].classList.remove("ok", "alerte");
+          if (texte === "Disponible") {
+            badges[i].classList.add("ok");
+          } else {
+            badges[i].classList.add("alerte");
+          }
+        }
+      }
+
+      var cartesStock = document.getElementById("cartes-stock");
+      if (cartesStock) {
+        styliserBadgesStock();
+        new MutationObserver(styliserBadgesStock).observe(cartesStock, { childList: true });
+      }
+    })();
+  </script>
 </body>
 </html>
