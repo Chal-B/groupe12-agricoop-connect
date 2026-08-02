@@ -1,0 +1,74 @@
+/**
+ * Page Membres — filtres, liste, formulaire nouveau membre
+ * @author Grasty SAMBA DINAULT (Dev FS2)
+ */
+@import url("../styles/main.css");
+
+/* Sous-titre aligné sous le titre dans le même bloc */
+
+#liste-membres {
+  min-height: 240px;
+  margin-bottom: var(--espace-2xl);
+  padding: var(--espace-xs) var(--espace-base);
+  background: var(--blanc);
+  border: 1px solid var(--bordure);
+  border-top: none;
+  border-radius: 0 0 var(--rayon-carte) var(--rayon-carte);
+}
+
+/* État vide : main.js injecte "Aucun membre trouvé." sans élément enfant */
+#liste-membres:not(:has(*)) {
+  display: grid;
+  place-items: center;
+  color: var(--texte-tres-doux);
+}
+
+.en-tete-liste {
+  display: grid;
+  grid-template-columns: 32px repeat(5, 1fr);
+  gap: var(--espace-md);
+  align-items: center;
+  padding: var(--espace-md) var(--espace-base);
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: var(--rayon-carte) var(--rayon-carte) 0 0;
+}
+
+.en-tete-liste span {
+  font-size: var(--texte-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+/* Numérotation des lignes via compteur CSS partagé (components.css) */
+
+@media (width <= 768px) {
+  .en-tete-liste,
+  .membre-ligne {
+    grid-template-columns: 32px repeat(5, 1fr);
+    min-width: 560px;
+  }
+
+  .en-tete-liste {
+    display: grid;
+    padding-inline: var(--espace-xs);
+  }
+
+  #liste-membres {
+    min-width: 560px;
+    padding: var(--espace-xs) 0;
+  }
+
+  .membre-ligne strong {
+    grid-column: auto;
+  }
+
+  .membre-ligne {
+    border-inline: 1px solid transparent;
+  }
+}
+
+/* ---------- Modal "Nouveau membre" (classes génériques de styles/main.css) ---------- */
