@@ -1,94 +1,55 @@
-/* Page Statistiques — même logique que Ventes : papier autour, données opaques */
+/* Page Statistiques — styles spécifiques (design system : styles/main.css) */
+@import url("../styles/main.css");
 
-.intro {
-  margin-bottom: var(--espace-lg);
+:root {
+  --fond-opaque: hsl(42 45% 99%);
 }
 
-.intro-eyebrow {
-  margin-bottom: var(--espace-xs);
-  font-size: var(--texte-xs);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--sidebar-primary);
+/* Extension grille-bento (FS6) */
+.bento-pleine {
+  grid-column: 1 / -1;
 }
 
-.intro h1 {
-  margin-bottom: var(--espace-xs);
-  font-size: var(--texte-xl);
-  letter-spacing: -0.02em;
-  color: var(--foreground);
+.bento-classement {
+  grid-column: span 4;
 }
 
-.intro > p {
-  margin: 0;
-  font-size: var(--texte-base);
-  color: var(--muted-foreground);
+.bento-top {
+  grid-column: span 2;
 }
 
-.panneau-entete {
+.bento-entete {
   display: flex;
   align-items: flex-start;
   gap: var(--espace-base);
   margin-bottom: var(--espace-base);
 }
 
-.panneau-entete h2 {
+.bento-entete h2 {
   margin: 0 0 var(--espace-xs);
-  font-size: var(--texte-md);
-  color: var(--foreground);
 }
 
-.panneau-entete p,
-.panneau-entete .note {
+.bento-sous-titre {
   margin: 0;
   font-size: var(--texte-sm);
-  color: var(--muted-foreground);
   font-weight: 400;
+  color: var(--muted-foreground);
 }
 
-.panneau-icone {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--rayon);
-  background: var(--primaire-clair);
-  color: var(--primaire);
-  flex-shrink: 0;
-}
-
-.panneau-icone svg {
-  width: 20px;
-  height: 20px;
-}
-
-.panneau-icone-or {
+.bento-icone-or {
   background: hsl(36 40% 88%);
   color: hsl(36 50% 35%);
 }
 
-.deux-colonnes {
-  display: grid;
-  grid-template-columns: 1.35fr 0.9fr;
-  gap: var(--espace-lg);
-  margin-bottom: var(--espace-2xl);
-  align-items: stretch;
-}
-
-.deux-colonnes .panneau {
+.bento-carte.section-motif,
+.bento-carte.section-motif-grille {
   margin-bottom: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
 }
 
-/* Blocs de données : fond opaque (comme le tableau Ventes) */
-.bloc-donnees,
 #classement-membres,
-.liste-rang-simple,
+#top-acheteur,
 .tableau-wrap table {
-  background: hsl(42 45% 99%);
+  background: var(--fond-opaque);
   border: 1px solid var(--border);
   border-radius: var(--rayon-carte);
   overflow: hidden;
@@ -104,7 +65,7 @@
 
 .tableau-wrap tbody td,
 .tableau-wrap tbody tr::before {
-  background-color: hsl(42 45% 99%);
+  background-color: var(--fond-opaque);
 }
 
 .tableau-wrap tbody tr:hover td,
@@ -126,10 +87,10 @@
   align-items: center;
   gap: var(--espace-md);
   padding: var(--espace-md) var(--espace-base);
-  background: hsl(42 45% 99%);
   border-bottom: 1px solid var(--border);
   font-size: var(--texte-base);
   color: var(--foreground);
+  background: var(--fond-opaque);
 }
 
 #classement-membres li:last-child {
@@ -155,6 +116,10 @@
   font-variant-numeric: tabular-nums;
 }
 
+#classement-membres li:nth-child(1) {
+  background: hsl(36 50% 94%);
+}
+
 #classement-membres li:nth-child(1)::before {
   background: var(--sidebar-primary);
   color: var(--sidebar-primary-foreground);
@@ -168,16 +133,6 @@
 #classement-membres li:nth-child(3)::before {
   background: hsl(28 35% 72%);
   color: var(--foreground);
-}
-
-#classement-membres li:nth-child(1) {
-  background: hsl(36 50% 94%);
-}
-
-.liste-rang-simple {
-  list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 #top-acheteur {
@@ -224,7 +179,7 @@
   flex-direction: column;
   gap: var(--espace-sm);
   padding: var(--espace-base);
-  background: hsl(42 45% 99%);
+  background: var(--fond-opaque);
   border: 1px solid var(--border);
   border-radius: var(--rayon-carte);
 }
@@ -242,8 +197,8 @@
 .indicateur dt svg {
   width: 15px;
   height: 15px;
-  color: var(--sidebar-primary);
   flex-shrink: 0;
+  color: var(--sidebar-primary);
 }
 
 .indicateur dd {
@@ -260,32 +215,29 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .deux-colonnes {
-    grid-template-columns: 1fr 1fr;
+  .bento-classement,
+  .bento-top {
+    grid-column: span 3;
   }
 }
 
 @media (max-width: 768px) {
-  .deux-colonnes,
+  .grille-bento {
+    grid-template-columns: 1fr;
+  }
+
+  .bento-pleine,
+  .bento-classement,
+  .bento-top {
+    grid-column: 1;
+  }
+
   .indicateurs {
     grid-template-columns: 1fr;
   }
 
-  .intro h1 {
-    font-size: var(--texte-lg);
-  }
-
-  .panneau {
-    padding: var(--espace-base);
-  }
-
-  .panneau-entete {
+  .bento-entete {
     gap: var(--espace-sm);
-  }
-
-  .panneau-icone {
-    width: 36px;
-    height: 36px;
   }
 
   .indicateur dd {

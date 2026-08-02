@@ -4,129 +4,124 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AgriCoop Connect — Statistiques</title>
-  <link rel="stylesheet" href="../base.css">
-  <link rel="stylesheet" href="../sidebar.css">
   <link rel="stylesheet" href="statistiques.css">
 </head>
 <body>
 
-  <!-- =====================================================================
-       NAVIGATION — TODO (Dev FS6)
-       Construire un menu de navigation vers les 8 pages du site.
-       ===================================================================== -->
-  <div class="app">
-    <aside class="sidebar" aria-label="Navigation">
-      <div class="sidebar-marque">
-        <i data-lucide="layout-grid" aria-hidden="true"></i>
-        <span>AgriCoop Connect</span>
+
+  <input type="checkbox" id="menu-burger" class="menu-burger" hidden>
+  <label for="menu-burger" class="voile" aria-label="Fermer le menu"></label>
+
+  <aside class="navbar" aria-label="Navigation">
+    <a class="logo" href="../dashboard/dashboard.html">
+      <i data-lucide="layout-grid" aria-hidden="true"></i>
+      <span>AgriCoop Connect</span>
+    </a>
+
+    <nav class="nav-contenu" aria-label="Menu principal">
+      <div class="nav-groupe">
+        <p class="nav-titre" id="nav-titre-principal">Principal</p>
+        <ul class="nav-links" aria-labelledby="nav-titre-principal">
+          <li>
+            <a href="../dashboard/dashboard.html">
+              <i class="icone" data-lucide="layout-dashboard" aria-hidden="true"></i>
+              Tableau de bord
+            </a>
+          </li>
+          <li>
+            <a href="../membres/membres.html">
+              <i class="icone" data-lucide="users" aria-hidden="true"></i>
+              Membres
+            </a>
+          </li>
+          <li>
+            <a href="../livraisons/livraisons.html">
+              <i class="icone" data-lucide="truck" aria-hidden="true"></i>
+              Livraisons
+            </a>
+          </li>
+          <li>
+            <a href="../paiements/paiements.html">
+              <i class="icone" data-lucide="credit-card" aria-hidden="true"></i>
+              Paiements
+            </a>
+          </li>
+          <li>
+            <a href="../ventes/ventes.html">
+              <i class="icone" data-lucide="chart-column" aria-hidden="true"></i>
+              Ventes &amp; Stock
+            </a>
+          </li>
+          <li class="actif">
+            <a href="statistiques.html" aria-current="page">
+              <i class="icone" data-lucide="trending-up" aria-hidden="true"></i>
+              Statistiques
+            </a>
+          </li>
+        </ul>
       </div>
 
-      <nav class="sidebar-nav" aria-label="Navigation principale">
-        <div class="nav-groupe">
-          <p class="nav-titre">Principal</p>
-          <ul class="nav-liste">
-            <li>
-              <a href="../dashboard/dashboard.html">
-                <i data-lucide="layout-dashboard" aria-hidden="true"></i>
-                <span class="nav-libelle">Tableau de bord</span>
-                <span class="nav-libelle-court">Accueil</span>
-              </a>
-            </li>
-            <li>
-              <a href="../membres/membres.html">
-                <i data-lucide="users" aria-hidden="true"></i>
-                <span class="nav-libelle">Membres</span>
-                <span class="nav-libelle-court">Membres</span>
-              </a>
-            </li>
-            <li>
-              <a href="../livraisons/livraisons.html">
-                <i data-lucide="truck" aria-hidden="true"></i>
-                <span class="nav-libelle">Livraisons</span>
-                <span class="nav-libelle-court">Livraisons</span>
-              </a>
-            </li>
-            <li>
-              <a href="../paiements/paiements.html">
-                <i data-lucide="credit-card" aria-hidden="true"></i>
-                <span class="nav-libelle">Paiements</span>
-                <span class="nav-libelle-court">Paiements</span>
-              </a>
-            </li>
-            <li>
-              <a href="../ventes/ventes.html">
-                <i data-lucide="chart-column" aria-hidden="true"></i>
-                <span class="nav-libelle">Ventes &amp; Stock</span>
-                <span class="nav-libelle-court">Ventes</span>
-              </a>
-            </li>
-            <li>
-              <a href="statistiques.html" aria-current="page">
-                <i data-lucide="trending-up" aria-hidden="true"></i>
-                <span class="nav-libelle">Statistiques</span>
-                <span class="nav-libelle-court">Stats</span>
-              </a>
-            </li>
-          </ul>
-        </div>
+      <div class="nav-groupe">
+        <p class="nav-titre" id="nav-titre-admin">Administration</p>
+        <ul class="nav-links" aria-labelledby="nav-titre-admin">
+          <li>
+            <a href="../comptes/comptes.html">
+              <i class="icone" data-lucide="settings" aria-hidden="true"></i>
+              Comptes
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-        <div class="nav-groupe">
-          <p class="nav-titre">Administration</p>
-          <ul class="nav-liste">
-            <li>
-              <a href="../comptes/comptes.html">
-                <i data-lucide="settings" aria-hidden="true"></i>
-                <span class="nav-libelle">Comptes</span>
-                <span class="nav-libelle-court">Comptes</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      <div class="sidebar-session">
-        <div class="session-carte">
-          <div class="session-haut">
-            <div class="session-avatar" aria-hidden="true">
-              <i data-lucide="user"></i>
-            </div>
-            <div>
-              <span class="session-role">Administrateur</span>
-              <p id="utilisateur-connecte">Non connecté(e)</p>
-            </div>
+    <div class="session-bar">
+      <div class="carte-session">
+        <div class="session-lien">
+          <div class="session-icone" aria-hidden="true">
+            <i data-lucide="user"></i>
           </div>
-          <div class="session-bande" aria-hidden="true"></div>
-          <button type="button" id="btn-deconnexion">
-            <i data-lucide="log-out" aria-hidden="true"></i>
-            <span class="btn-deco-texte">Déconnexion</span>
-          </button>
+          <div class="session-infos">
+            <span class="session-etiquette">Session</span>
+            <!-- *** NE PAS MODIFIER l'id — main.js l'utilise *** -->
+            <p id="utilisateur-connecte">Non connecté(e)</p>
+          </div>
         </div>
+        <div class="session-separateur" aria-hidden="true"></div>
+        <!-- *** NE PAS MODIFIER l'id — main.js l'utilise *** -->
+        <button type="button" class="btn btn-secondaire" id="btn-deconnexion">
+          <i data-lucide="log-out" aria-hidden="true"></i>
+          Déconnexion
+        </button>
       </div>
-    </aside>
+    </div>
+  </aside>
 
-    <main class="contenu">
-      <header class="intro">
-        <h1>Statistiques</h1>
-        <p>Rapport partenaire, volumes par culture, classement et top acheteur.</p>
-      </header>
+  <main class="conteneur">
+    <header class="entete-page">
+      <div class="entete-texte">
+        <h1 class="titre-page">Statistiques</h1>
+        <p class="sous-titre-page">Rapport partenaire, volumes par culture, classement et top acheteur.</p>
+      </div>
+      <label for="menu-burger" class="menu-burger-icone" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </label>
+    </header>
+
+    <div class="grille-bento">
 
       <!-- =====================================================================
-           RAPPORT BAILLEUR — TODO (Dev FS6 + DM)
-           Le dev structure la section, le DM fournit les textes d'habillage.
-           Les valeurs chiffrées sont injectées par main.js.
-
-           *** NE PAS MODIFIER les id ci-dessous — main.js les utilise ***
+           RAPPORT BAILLEUR (Dev FS6 + DM)
+           Structure + textes d'habillage ; valeurs injectées par main.js.
+           *** NE PAS MODIFIER les id — main.js les utilise ***
            ===================================================================== -->
-      <section id="rapport-bailleur-contenu" class="panneau panneau-points panneau-rapport" aria-labelledby="titre-rapport">
-        <header class="panneau-entete">
-          <span class="panneau-icone" aria-hidden="true">
+      <section id="rapport-bailleur-contenu" class="bento-carte bento-pleine section-motif" aria-labelledby="titre-rapport">
+        <header class="bento-entete">
+          <span class="bento-icone" aria-hidden="true">
             <i data-lucide="file-bar-chart"></i>
           </span>
           <div>
             <h2 id="titre-rapport">Rapport partenaire</h2>
-            <p class="note">
-              Chiffres agrégés uniquement — aucun nom de membre.
-            </p>
+            <p class="bento-sous-titre">Chiffres agrégés uniquement — aucun nom de membre.</p>
           </div>
         </header>
 
@@ -162,25 +157,24 @@
         </dl>
       </section>
 
-      <section class="panneau panneau-carnet" aria-labelledby="titre-cultures">
-        <header class="panneau-entete">
-          <span class="panneau-icone" aria-hidden="true">
+      <!-- =====================================================================
+           TABLEAU PAR CULTURE (Dev FS6)
+           En-têtes : Culture, Volume total, Valeur totale
+           *** NE PAS MODIFIER l'id — main.js l'utilise ***
+           ===================================================================== -->
+      <section class="bento-carte bento-pleine sans-carte section-motif-grille" aria-labelledby="titre-cultures">
+        <header class="bento-entete">
+          <span class="bento-icone" aria-hidden="true">
             <i data-lucide="wheat"></i>
           </span>
           <div>
             <h2 id="titre-cultures">Volumes par culture</h2>
-            <p>Livraisons cumulées et valeur des ventes</p>
+            <p class="bento-sous-titre">Livraisons cumulées et valeur des ventes</p>
           </div>
         </header>
-        <!-- =====================================================================
-             TABLEAU PAR CULTURE — TODO (Dev FS6)
-
-             *** NE PAS MODIFIER l'id ci-dessous — main.js l'utilise ***
-             ===================================================================== -->
         <div class="tableau-wrap">
-          <table>
+          <table aria-labelledby="titre-cultures">
             <thead>
-              <!-- TODO (Dev FS6) : en-têtes (Culture, Volume total, Valeur totale) -->
               <tr>
                 <th scope="col">N°</th>
                 <th scope="col">Culture</th>
@@ -193,53 +187,46 @@
         </div>
       </section>
 
-      <div class="deux-colonnes">
-        <section class="panneau panneau-carnet" aria-labelledby="titre-classement">
-          <header class="panneau-entete">
-            <span class="panneau-icone" aria-hidden="true">
-              <i data-lucide="trophy"></i>
-            </span>
-            <div>
-              <h2 id="titre-classement">Classement des membres</h2>
-              <p>Volume total livré à la coopérative</p>
-            </div>
-          </header>
-          <!-- =====================================================================
-               CLASSEMENT DES MEMBRES — TODO (Dev FS6)
-               Le contenu (liste <li>) est injecté par main.js.
+      <!-- =====================================================================
+           CLASSEMENT DES MEMBRES (Dev FS6)
+           Contenu (<li>) injecté par main.js.
+           *** NE PAS MODIFIER l'id — main.js l'utilise ***
+           ===================================================================== -->
+      <section class="bento-carte bento-classement section-motif-grille" aria-labelledby="titre-classement">
+        <header class="bento-entete">
+          <span class="bento-icone" aria-hidden="true">
+            <i data-lucide="trophy"></i>
+          </span>
+          <div>
+            <h2 id="titre-classement">Classement des membres</h2>
+            <p class="bento-sous-titre">Volume total livré à la coopérative</p>
+          </div>
+        </header>
+        <ol id="classement-membres"></ol>
+      </section>
 
-               *** NE PAS MODIFIER l'id ci-dessous — main.js l'utilise ***
-               ===================================================================== -->
-          <ol id="classement-membres"></ol>
-        </section>
+      <!-- =====================================================================
+           TOP ACHETEUR (Dev FS6)
+           *** NE PAS MODIFIER l'id — main.js l'utilise ***
+           ===================================================================== -->
+      <section class="bento-carte bento-top section-motif-grille" aria-labelledby="titre-top">
+        <header class="bento-entete">
+          <span class="bento-icone bento-icone-or" aria-hidden="true">
+            <i data-lucide="store"></i>
+          </span>
+          <div>
+            <h2 id="titre-top">Top acheteur</h2>
+            <p class="bento-sous-titre">Partenaire commercial le plus actif</p>
+          </div>
+        </header>
+        <div id="top-acheteur" aria-live="polite"></div>
+      </section>
 
-        <section class="panneau panneau-carnet panneau-top" aria-labelledby="titre-top">
-          <header class="panneau-entete">
-            <span class="panneau-icone panneau-icone-or" aria-hidden="true">
-              <i data-lucide="store"></i>
-            </span>
-            <div>
-              <h2 id="titre-top">Top acheteur</h2>
-              <p>Partenaire commercial le plus actif</p>
-            </div>
-          </header>
-          <!-- =====================================================================
-               TOP ACHETEUR — TODO (Dev FS6)
+    </div>
+  </main>
 
-               *** NE PAS MODIFIER l'id ci-dessous — main.js l'utilise ***
-               ===================================================================== -->
-          <ol class="liste-rang liste-rang-simple" aria-label="Top acheteur">
-            <li id="top-acheteur"></li>
-          </ol>
-        </section>
-      </div>
-    </main>
-  </div>
-
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <script>
-    lucide.createIcons();
-  </script>
+  <script src="https://unpkg.com/lucide@1.28.0/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons();</script>
   <!-- NE PAS MODIFIER — scripts de connexion au backend -->
   <script src="../functions.js"></script>
   <script src="../main.js"></script>

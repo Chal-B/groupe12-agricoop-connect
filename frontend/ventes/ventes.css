@@ -1,25 +1,12 @@
-/* Page Ventes — styles spécifiques (tokens via base.css) */
+/* Page Ventes — styles spécifiques (design system : styles/main.css) */
+@import url("../styles/main.css");
 
-.intro {
-  margin-bottom: var(--espace-lg);
+:root {
+  --fond-opaque: hsl(42 45% 99%);
 }
 
-.intro h1 {
-  margin-bottom: var(--espace-xs);
-  font-size: var(--texte-xl);
-  letter-spacing: -0.02em;
-  color: var(--foreground);
-}
-
-.intro > p {
-  margin: 0;
-  font-size: var(--texte-base);
-  color: var(--muted-foreground);
-}
-
-.panneau h2 {
+.section h2 {
   margin: 0 0 var(--espace-base);
-  font-size: var(--texte-md);
   font-weight: 600;
   color: var(--foreground);
 }
@@ -32,7 +19,7 @@
 
 #cartes-stock .card {
   position: relative;
-  background: hsl(42 45% 99%);
+  background: var(--fond-opaque);
   border: 1px solid var(--border);
   box-shadow: none;
 }
@@ -43,22 +30,17 @@
   gap: var(--espace-sm);
   margin-bottom: var(--espace-sm);
   padding-right: 90px;
-  font-size: var(--texte-base);
-  font-weight: 500;
-  color: var(--muted-foreground);
 }
 
-/* Icône feuille (maquette) — main.js n’injecte pas d’icône */
 #cartes-stock .card h3::before {
   content: "";
   flex-shrink: 0;
   width: 16px;
   height: 16px;
   background-color: var(--sidebar-primary);
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E")
-    center / contain no-repeat;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E")
-    center / contain no-repeat;
+  --feuille: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
+  mask: var(--feuille) center / contain no-repeat;
+  -webkit-mask: var(--feuille) center / contain no-repeat;
 }
 
 #cartes-stock .card p {
@@ -79,7 +61,7 @@
   margin-top: 0;
 }
 
-.filtres-ventes.filtres {
+.filtres-ventes {
   margin-bottom: var(--espace-base);
 }
 
@@ -89,29 +71,26 @@
   color: var(--muted-foreground);
 }
 
-.panneau-carnet .tableau-wrap table {
-  background: hsl(42 45% 99%);
+.section-motif-grille .tableau-wrap table {
+  background: var(--fond-opaque);
   border: 1px solid var(--border);
 }
 
-.panneau-carnet .tableau-wrap thead th {
+.section-motif-grille .tableau-wrap thead th {
   background: var(--muted);
 }
 
-.panneau-carnet .tableau-wrap tbody td,
-.panneau-carnet .tableau-wrap tbody tr::before {
-  background-color: hsl(42 45% 99%);
+.section-motif-grille .tableau-wrap tbody td,
+.section-motif-grille .tableau-wrap tbody tr::before {
+  background-color: var(--fond-opaque);
 }
 
-.panneau-carnet .tableau-wrap tbody tr:hover td,
-.panneau-carnet .tableau-wrap tbody tr:hover::before {
+.section-motif-grille .tableau-wrap tbody tr:hover td,
+.section-motif-grille .tableau-wrap tbody tr:hover::before {
   background-color: var(--muted);
 }
 
-tbody tr[hidden] {
-  display: none;
-}
-
+tbody tr[hidden],
 tbody tr[hidden]::before {
   display: none;
 }
@@ -127,22 +106,14 @@ tbody tr[hidden]::before {
     grid-template-columns: 1fr;
   }
 
-  .filtres-ventes.filtres {
+  .filtres-ventes {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .filtres-ventes.filtres input {
+  .filtres-ventes input {
     margin-left: 0;
     width: 100%;
-  }
-
-  .intro h1 {
-    font-size: var(--texte-lg);
-  }
-
-  .panneau {
-    padding: var(--espace-base);
   }
 
   #cartes-stock .card {
@@ -165,7 +136,7 @@ tbody tr[hidden]::before {
   }
 
   .tableau-wrap table,
-  .panneau-carnet .tableau-wrap table {
+  .section-motif-grille .tableau-wrap table {
     width: 100%;
     min-width: 0;
     table-layout: fixed;
@@ -188,19 +159,8 @@ tbody tr[hidden]::before {
     padding-inline: 2px;
   }
 
-  .tableau-wrap thead th:nth-child(2) {
-    width: 30%;
-  }
-
-  .tableau-wrap thead th:nth-child(3) {
-    width: 18%;
-  }
-
-  .tableau-wrap thead th:nth-child(4) {
-    width: 18%;
-  }
-
-  .tableau-wrap thead th:nth-child(5) {
-    width: 22%;
-  }
+  .tableau-wrap thead th:nth-child(2) { width: 30%; }
+  .tableau-wrap thead th:nth-child(3) { width: 18%; }
+  .tableau-wrap thead th:nth-child(4) { width: 18%; }
+  .tableau-wrap thead th:nth-child(5) { width: 22%; }
 }

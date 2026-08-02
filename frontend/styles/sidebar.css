@@ -1,0 +1,284 @@
+/**
+ * SIDEBAR.CSS : navigation latérale des 7 pages (hors login)
+ * @author Espoir LOEMBA (Dev FS1)
+ */
+
+/* ---------- Sidebar (navigation sur les 7 pages, hors login) ---------- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  width: 256px;
+  padding: var(--espace-lg) var(--espace-md);
+  background: var(--sidebar);
+  border-right: 1px solid var(--sidebar-border);
+
+  /* Mobile : panneau coulissant caché derrière le bord gauche */
+  @media (width <= 768px) {
+    width: 272px;
+    max-width: 85vw;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+    z-index: 50;
+  }
+
+  /* Desktop : décalage du contenu à droite de la sidebar */
+  @media (width > 768px) {
+    & ~ .conteneur,
+    & ~ .pied {
+      margin-left: 256px;
+      width: calc(100% - 256px);
+    }
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-sm);
+  margin: 0 calc(-1 * var(--espace-md)) var(--espace-base);
+  padding: 0 var(--espace-md) var(--espace-base);
+  font-size: var(--texte-md);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: var(--sidebar-foreground);
+  border-bottom: 1px solid var(--sidebar-border);
+}
+
+.logo svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: var(--sidebar-primary);
+}
+
+.logo:hover {
+  opacity: 0.85;
+  text-decoration: none;
+}
+
+.nav-groupe + .nav-groupe {
+  margin-top: var(--espace-base);
+}
+
+/* Conteneur unique des groupes : pousse la session en bas de la sidebar */
+.nav-contenu {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  /* Pas de barre visible : le contenu tient en général ; scroll molette si écran très bas */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.nav-contenu::-webkit-scrollbar {
+  display: none;
+}
+
+/* Groupe poussé en bas, au-dessus de la barre de session */
+.nav-groupe-pousse {
+  margin-top: auto;
+}
+
+.nav-titre {
+  margin: 0 0 var(--espace-xs) var(--espace-md);
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sidebar-foreground);
+  opacity: 0.65;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  list-style: none;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-sm);
+  padding: 8px var(--espace-md);
+  border-radius: var(--rayon);
+  font-size: var(--texte-base);
+  font-weight: 500;
+  color: var(--sidebar-foreground);
+  transition: var(--transition);
+}
+
+.nav-links li:hover,
+.nav-links li.actif {
+  background: var(--sidebar-accent);
+  color: var(--sidebar-accent-foreground);
+}
+
+.nav-links li.actif a {
+  color: var(--sidebar-accent-foreground);
+  font-weight: 600;
+}
+
+.nav-links a {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-sm);
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  text-decoration: none;
+}
+
+.nav-links .icone {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+/* Barre de session : carte utilisateur en bas de la sidebar
+   (main.js remplit #utilisateur-connecte, ne pas modifier les ids) */
+.session-bar {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: var(--espace-sm);
+  margin-top: var(--espace-sm);
+  padding-top: var(--espace-sm);
+  font-size: var(--texte-sm);
+  color: var(--sidebar-foreground);
+}
+
+.carte-session {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-sm);
+  padding: var(--espace-sm) var(--espace-base);
+  background: transparent;
+  border: 1px solid var(--sidebar-border);
+  border-radius: var(--rayon-carte);
+}
+
+.session-lien {
+  color: var(--sidebar-foreground);
+  text-decoration: none;
+}
+
+.session-lien:hover {
+  text-decoration: none;
+}
+
+.session-icone {
+  border-radius: 50%;
+  background: hsl(42 40% 92% / 0.2);
+  color: #ffffff;
+}
+
+.session-infos {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.session-etiquette {
+  font-size: var(--texte-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--sidebar-primary);
+}
+
+.session-infos #utilisateur-connecte {
+  overflow: hidden;
+  font-size: var(--texte-sm);
+  color: #ffffff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.carte-session .btn {
+  width: 100%;
+}
+
+.session-separateur {
+  height: 4px;
+  width: 96%;
+  margin: 0 auto;
+  background: repeating-linear-gradient(
+    -45deg,
+    hsl(0 0% 100% / 0.3) 0 1px,
+    transparent 1px 3px
+  );
+  background-size: 100% 100%;
+}
+
+.carte-session .btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transform: rotate(180deg);
+}
+
+/* Burger et voile : utilisés uniquement sur mobile */
+.menu-burger {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.menu-burger-icone {
+  display: none;
+
+  @media (width <= 768px) {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 5px;
+    margin-left: auto;
+    padding: 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--rayon);
+    cursor: pointer;
+
+    span {
+      width: 18px;
+      height: 2px;
+      background: var(--foreground);
+      border-radius: 2px;
+    }
+  }
+}
+
+.voile {
+  display: none;
+
+  @media (width <= 768px) {
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    background: hsl(0 0% 0% / 0.25);
+  }
+}
+
+/* Ouverture du menu via la checkbox (mobile uniquement) */
+.menu-burger:checked {
+  @media (width <= 768px) {
+    & ~ .navbar {
+      transform: translateX(0);
+    }
+
+    & ~ .voile {
+      display: block;
+    }
+  }
+}

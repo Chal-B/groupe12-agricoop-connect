@@ -1,0 +1,263 @@
+/**
+ * LAYOUT.CSS : conteneur, en-têtes de page, sections, cartes et pied de page
+ * .zone-nouveau-* : patron "Ajouter" partagé avec les pages FS2/FS3/FS4
+ * @author Espoir LOEMBA (Dev FS1)
+ */
+
+/* ---------- Look de carte commun (fond, bordure, arrondi) ---------- */
+.section,
+.card,
+.carte-indicateur,
+.bento-carte,
+.modal-carte,
+.carte-connexion,
+table {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--rayon-carte);
+}
+
+/* Pastille d'icône 40×40 : carte-indicateur (dashboard), modal, bento, session */
+.carte-icone,
+.modal-icone,
+.bento-icone,
+.session-icone {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+.carte-icone,
+.modal-icone,
+.bento-icone {
+  border-radius: var(--rayon);
+  background: var(--primaire-clair);
+  color: var(--primaire);
+}
+
+.carte-icone svg,
+.modal-icone svg,
+.bento-icone svg,
+.session-icone svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Titre de section et de carte bento : même gabarit */
+.section h2,
+.bento-carte h2 {
+  font-size: var(--texte-md);
+  letter-spacing: var(--tracking-normal);
+}
+
+/* Grand chiffre : carte-valeur (dashboard) / .chiffre (statistiques) */
+.carte-valeur,
+.bento-stat .chiffre {
+  font-size: var(--texte-xl);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Conteneur principal ---------- */
+.conteneur {
+  flex: 1;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  --padding-conteneur: var(--espace-xl) var(--espace-lg);
+  padding: var(--padding-conteneur);
+
+  @media (width <= 768px) {
+    --padding-conteneur: var(--espace-lg) var(--espace-base) var(--espace-base);
+  }
+}
+
+.conteneur > :last-child {
+  margin-bottom: 0;
+}
+
+/* En-tête de page : titre + sous-titre, collé en haut au défilement */
+.entete-page {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espace-base);
+  padding: var(--espace-sm) 0;
+  background: var(--fond);
+
+  @media (width <= 768px) {
+    width: 100%;
+  }
+}
+
+.entete-texte {
+  min-width: 0;
+}
+
+/* Dans l'en-tête, le sous-titre n'ajoute pas de marge basse */
+.entete-page .sous-titre-page {
+  margin-bottom: 0;
+}
+
+.titre-page {
+  margin-bottom: var(--espace-xs);
+  font-size: var(--texte-xl);
+  letter-spacing: -0.02em;
+}
+
+.sous-titre-page {
+  margin-bottom: var(--espace-2xl);
+  font-size: var(--texte-base);
+  color: var(--muted-foreground);
+}
+
+/* ---------- Sections / cartes ---------- */
+.section {
+  margin-bottom: var(--espace-2xl);
+  --padding-section: var(--espace-lg);
+  padding: var(--padding-section);
+
+  @media (width <= 768px) {
+    --padding-section: var(--espace-base);
+
+    /* Mobile : sections tableau sans carte, sans fond ni bordure */
+    &.sans-carte {
+      --padding-section: 0;
+      background: none;
+      border: none;
+    }
+  }
+}
+
+.section h2 {
+  margin-bottom: var(--espace-base);
+}
+
+/* Barre d'actions : étalée sur la largeur (filtres + zones titre/bouton d'ajout) */
+.zone-nouveau-membre,
+.zone-nouveau-compte,
+.zone-nouvelle-livraison,
+.zone-nouveau-paiement,
+.filtres {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--espace-base);
+}
+
+/* Zone titre + bouton d'ajout (partagée par membres/comptes/livraisons/paiements) */
+.zone-nouveau-membre,
+.zone-nouveau-compte,
+.zone-nouvelle-livraison,
+.zone-nouveau-paiement {
+  align-items: flex-end;
+  margin-bottom: var(--espace-2xl);
+
+  /* Mobile : la zone titre+bouton reste collée en haut (header sticky) */
+  @media (width <= 768px) {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--fond);
+    margin-bottom: var(--espace-base);
+  }
+}
+
+/* ---------- Grille & cartes ---------- */
+.grille {
+  display: grid;
+  --gap-grille: var(--espace-lg);
+  gap: var(--gap-grille);
+  margin-bottom: var(--espace-2xl);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+  @media (width <= 768px) {
+    --gap-grille: var(--espace-base);
+  }
+}
+
+.card {
+  --padding-carte: var(--espace-lg);
+  padding: var(--padding-carte);
+
+  @media (width <= 768px) {
+    --padding-carte: var(--espace-base);
+  }
+}
+
+.card h3 {
+  margin-bottom: var(--espace-sm);
+  font-size: var(--texte-base);
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+.card p {
+  margin-bottom: var(--espace-sm);
+  font-size: var(--texte-md);
+  font-weight: 600;
+}
+
+/* Cartes indicateurs du tableau de bord (main.js remplit .carte-valeur) */
+.carte-indicateur {
+  display: flex;
+  flex-direction: column;
+  --padding-carte: var(--espace-lg);
+  padding: var(--padding-carte);
+
+  @media (width <= 768px) {
+    --padding-carte: var(--espace-base);
+  }
+}
+
+/* Rangée alignée : en-têtes de cartes (dashboard/statistiques) et lien de session */
+.carte-entete,
+.bento-entete,
+.session-lien {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-base);
+}
+
+.carte-entete {
+  margin-bottom: var(--espace-base);
+}
+
+.carte-titre-bloc {
+  min-width: 0;
+}
+
+.carte-titre-bloc h3 {
+  margin-bottom: 2px;
+  font-size: var(--texte-base);
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--muted-foreground);
+}
+
+.carte-valeur {
+  --taille-valeur: var(--texte-xl);
+  font-size: var(--taille-valeur);
+  font-weight: 600;
+  color: var(--foreground);
+
+  @media (width <= 480px) {
+    --taille-valeur: 1.5rem;
+  }
+}
+
+/* ---------- Pied de page ---------- */
+.pied {
+  padding: var(--espace-lg);
+  font-size: var(--texte-sm);
+  text-align: center;
+  color: var(--texte-tres-doux);
+  background: var(--card);
+  border-top: 1px solid var(--border);
+}
