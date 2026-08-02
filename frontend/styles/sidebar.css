@@ -73,13 +73,6 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  /* Pas de barre visible : le contenu tient en général ; scroll molette si écran très bas */
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.nav-contenu::-webkit-scrollbar {
-  display: none;
 }
 
 /* Groupe poussé en bas, au-dessus de la barre de session */
@@ -129,11 +122,7 @@
 
 .nav-links a {
   flex: 1;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--espace-sm);
   color: inherit;
-  text-decoration: none;
 }
 
 .nav-links a:hover {
@@ -151,10 +140,9 @@
 .session-bar {
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
   gap: var(--espace-sm);
-  margin-top: var(--espace-sm);
-  padding-top: var(--espace-sm);
+  margin-top: var(--espace-base);
+  padding-top: var(--espace-base);
   font-size: var(--texte-sm);
   color: var(--sidebar-foreground);
 }
@@ -162,8 +150,8 @@
 .carte-session {
   display: flex;
   flex-direction: column;
-  gap: var(--espace-sm);
-  padding: var(--espace-sm) var(--espace-base);
+  gap: var(--espace-base);
+  padding: var(--espace-base);
   background: transparent;
   border: 1px solid var(--sidebar-border);
   border-radius: var(--rayon-carte);
@@ -210,7 +198,7 @@
 }
 
 .session-separateur {
-  height: 4px;
+  height: 6px;
   width: 96%;
   margin: 0 auto;
   background: repeating-linear-gradient(

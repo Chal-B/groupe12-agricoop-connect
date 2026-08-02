@@ -1,166 +1,72 @@
-/* Page Ventes — styles spécifiques (design system : styles/main.css) */
+/**
+ * Page Ventes & Stock — cartes de stock et tableau des ventes
+ * @author Saint Chalbher y (Dev FS5)
+ */
 @import url("../styles/main.css");
 
-:root {
-  --fond-opaque: hsl(42 45% 99%);
+/* Masquer la barre de défilement de la page (sans modifier styles/) */
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.section h2 {
-  margin: 0 0 var(--espace-base);
-  font-weight: 600;
-  color: var(--foreground);
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* Sidebar non scrollable : tous les liens restent visibles */
+.navbar {
+  overflow: hidden;
+}
+
+.nav-contenu {
+  overflow: hidden;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.nav-links li {
+  padding-block: 6px;
+}
+
+.session-bar {
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+/* Desktop : l'en-tête de page reste en place au défilement (mobile : collé) */
+@media (width > 768px) {
+  .entete-page {
+    position: static;
+  }
 }
 
 #cartes-stock {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--espace-lg);
+  gap: var(--espace-base);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
+/* Icône feuille décorative sur chaque carte de stock (contenu injecté par main.js) */
 #cartes-stock .card {
   position: relative;
-  background: var(--fond-opaque);
-  border: 1px solid var(--border);
-  box-shadow: none;
+  overflow: hidden;
 }
 
-#cartes-stock .card h3 {
-  display: flex;
-  align-items: center;
-  gap: var(--espace-sm);
-  margin-bottom: var(--espace-sm);
-  padding-right: 90px;
-}
-
-#cartes-stock .card h3::before {
+#cartes-stock .card::after {
   content: "";
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  background-color: var(--sidebar-primary);
-  --feuille: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
-  mask: var(--feuille) center / contain no-repeat;
-  -webkit-mask: var(--feuille) center / contain no-repeat;
-}
-
-#cartes-stock .card p {
-  margin-bottom: var(--espace-md);
-  font-size: var(--texte-md);
-  font-weight: 600;
-  color: var(--foreground);
-}
-
-#cartes-stock .card .badge {
   position: absolute;
-  top: var(--espace-lg);
-  right: var(--espace-lg);
-}
-
-.barre-stock-fond {
-  height: 6px;
-  margin-top: 0;
-}
-
-.filtres-ventes {
-  margin-bottom: var(--espace-base);
-}
-
-.filtre-vide {
-  margin-top: var(--espace-base);
-  font-size: var(--texte-sm);
-  color: var(--muted-foreground);
-}
-
-.section-motif-grille .tableau-wrap table {
-  background: var(--fond-opaque);
-  border: 1px solid var(--border);
-}
-
-.section-motif-grille .tableau-wrap thead th {
-  background: var(--muted);
-}
-
-.section-motif-grille .tableau-wrap tbody td,
-.section-motif-grille .tableau-wrap tbody tr::before {
-  background-color: var(--fond-opaque);
-}
-
-.section-motif-grille .tableau-wrap tbody tr:hover td,
-.section-motif-grille .tableau-wrap tbody tr:hover::before {
-  background-color: var(--muted);
-}
-
-tbody tr[hidden],
-tbody tr[hidden]::before {
-  display: none;
-}
-
-@media (max-width: 1100px) {
-  #cartes-stock {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  #cartes-stock {
-    grid-template-columns: 1fr;
-  }
-
-  .filtres-ventes {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .filtres-ventes input {
-    margin-left: 0;
-    width: 100%;
-  }
-
-  #cartes-stock .card {
-    padding: var(--espace-base);
-  }
-
-  #cartes-stock .card h3 {
-    padding-right: 76px;
-  }
-
-  #cartes-stock .card .badge {
-    top: var(--espace-base);
-    right: var(--espace-base);
-  }
-
-  .tableau-wrap {
-    margin: 0;
-    width: 100%;
-    overflow: visible;
-  }
-
-  .tableau-wrap table,
-  .section-motif-grille .tableau-wrap table {
-    width: 100%;
-    min-width: 0;
-    table-layout: fixed;
-  }
-
-  .tableau-wrap thead th,
-  .tableau-wrap tbody td,
-  .tableau-wrap tbody tr::before {
-    padding: 8px 4px;
-    font-size: 0.6875rem;
-    letter-spacing: 0.02em;
-    vertical-align: top;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
-
-  .tableau-wrap thead th:first-child,
-  .tableau-wrap tbody tr::before {
-    width: 1.75rem;
-    padding-inline: 2px;
-  }
-
-  .tableau-wrap thead th:nth-child(2) { width: 30%; }
-  .tableau-wrap thead th:nth-child(3) { width: 18%; }
-  .tableau-wrap thead th:nth-child(4) { width: 18%; }
-  .tableau-wrap thead th:nth-child(5) { width: 22%; }
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='%232f4a3c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
 }

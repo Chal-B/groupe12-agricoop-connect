@@ -1,8 +1,52 @@
-/* Page Statistiques — styles spécifiques (design system : styles/main.css) */
+/**
+ * Page Statistiques — rapport, cultures, classement, top acheteur
+ * @author Saint Chalbher y (Dev FS6)
+ */
 @import url("../styles/main.css");
+
+/* Masquer la barre de défilement de la page (sans modifier styles/) */
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* Sidebar non scrollable : tous les liens restent visibles */
+.navbar {
+  overflow: hidden;
+}
+
+.nav-contenu {
+  overflow: hidden;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.nav-links li {
+  padding-block: 6px;
+}
+
+.session-bar {
+  flex-shrink: 0;
+  margin-top: auto;
+}
 
 :root {
   --fond-opaque: hsl(42 45% 99%);
+}
+
+/* Desktop : l'en-tête de page reste en place au défilement (mobile : collé) */
+@media (width > 768px) {
+  .entete-page {
+    position: static;
+  }
 }
 
 /* Extension grille-bento (FS6) */
@@ -44,6 +88,10 @@
 .bento-carte.section-motif,
 .bento-carte.section-motif-grille {
   margin-bottom: 0;
+}
+
+.grille-bento {
+  margin-bottom: var(--espace-2xl);
 }
 
 #classement-membres,
