@@ -1,17 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgriCoop Connect — Gestion des comptes</title>
-  <link rel="stylesheet" href="comptes.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgriCoop Connect — Gestion des comptes</title>
+    <link rel="stylesheet" href="comptes.css" />
+  </head>
+  <body>
+    <!-- NAVIGATION — TODO (Dev FS2) -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">⚘</span>
+        <span>AgriCoop Connect</span>
+      </div>
 
-  <!-- NAVIGATION — TODO (Dev FS2) -->
+      <p class="nav-section-title">Principal</p>
+      <nav class="nav-list">
+        <a class="nav-item" href="../tableau-de-bord/tableau-de-bord.html">
+          <span class="nav-ico" aria-hidden="true">▦</span>Tableau de bord
+        </a>
+        <a class="nav-item" href="../membres/membres.html">
+          <span class="nav-ico" aria-hidden="true">◍</span>Membres
+        </a>
+        <a class="nav-item" href="../livraisons/livraisons.html">
+          <span class="nav-ico" aria-hidden="true">▤</span>Livraisons
+        </a>
+        <a class="nav-item" href="../paiements/paiements.html">
+          <span class="nav-ico" aria-hidden="true">▥</span>Paiements
+        </a>
+        <a class="nav-item" href="../ventes/ventes.html">
+          <span class="nav-ico" aria-hidden="true">▧</span>Ventes &amp; stock
+        </a>
+        <a class="nav-item" href="../statistiques/statistiques.html">
+          <span class="nav-ico" aria-hidden="true">◮</span>Statistiques
+        </a>
+      </nav>
 
-  <main>
-    <!-- =====================================================================
+      <p class="nav-section-title">Administration</p>
+      <nav class="nav-list">
+        <a
+          class="nav-item nav-item--current"
+          href="comptes.html"
+          aria-current="page"
+        >
+          <span class="nav-ico" aria-hidden="true">⚙</span>Comptes
+        </a>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="user-card">
+          <span class="user-ico" aria-hidden="true">☺</span>
+          <p class="user-etat" id="utilisateur-connecte">Non connecté(e)</p>
+        </div>
+        <button class="btn-deconnexion" id="btn-deconnexion" type="button">
+          ⇤ Déconnexion
+        </button>
+      </div>
+    </aside>
+
+    <main>
+      <header class="page-header">
+        <h1>Gestion des comptes</h1>
+        <p class="page-sous-titre">
+          Créez et consultez les comptes d'accès à AgriCoop Connect
+        </p>
+      </header>
+
+      <!-- =====================================================================
          RÉSERVÉ À LA SECRÉTAIRE — TODO (Dev FS2)
          Cette page ne devrait être utile qu'à la Secrétaire (rôle Admin).
          Afficher un avertissement si l'utilisateur connecté n'a pas ce
@@ -20,9 +75,9 @@
 
          *** NE PAS MODIFIER l'id ci-dessous ***
          ===================================================================== -->
-    <div id="acces-refuse-comptes" hidden></div>
+      <div id="acces-refuse-comptes" class="banner banner--error" hidden></div>
 
-    <!-- =====================================================================
+      <!-- =====================================================================
          FORMULAIRE NOUVEAU COMPTE — TODO (Dev FS2)
          Construire le formulaire de création de compte (nom d'utilisateur,
          mot de passe, rôle, nom complet). Le rôle est un menu déroulant à
@@ -31,39 +86,73 @@
 
          *** NE PAS MODIFIER les id ci-dessous — main.js les utilise ***
          ===================================================================== -->
-    <form id="form-nouveau-compte">
-      <input type="text" id="c-nom-utilisateur" placeholder="Nom d'utilisateur">
-      <input type="password" id="c-mot-de-passe" placeholder="Mot de passe temporaire">
-      <input type="text" id="c-nom-complet" placeholder="Nom complet">
-      <select id="c-role">
-        <option value="">-- Choisir un rôle --</option>
-        <option value="Président">Président</option>
-        <option value="Trésorière">Trésorière</option>
-        <option value="Responsable dépôt">Responsable dépôt</option>
-        <option value="Membre">Membre</option>
-      </select>
-      <button type="submit">Créer le compte</button>
-    </form>
+      <section class="panel panel--form">
+        <h2>Nouveau compte</h2>
+        <form id="form-nouveau-compte" class="form-comptes">
+          <input
+            type="text"
+            id="c-nom-utilisateur"
+            placeholder="Nom d'utilisateur"
+            aria-label="Nom d'utilisateur"
+          />
+          <input
+            type="password"
+            id="c-mot-de-passe"
+            placeholder="Mot de passe temporaire"
+            aria-label="Mot de passe temporaire"
+          />
+          <input
+            type="text"
+            id="c-nom-complet"
+            placeholder="Nom complet"
+            aria-label="Nom complet"
+          />
+          <select id="c-role" aria-label="Rôle">
+            <option value="">-- Choisir un rôle --</option>
+            <option value="Président">Président</option>
+            <option value="Trésorière">Trésorière</option>
+            <option value="Responsable dépôt">Responsable dépôt</option>
+            <option value="Membre">Membre</option>
+          </select>
+          <button type="submit">Créer le compte</button>
+        </form>
 
-    <div id="message-erreur-compte" hidden></div>
-    <div id="message-succes-compte" hidden></div>
+        <div
+          id="message-erreur-compte"
+          class="banner banner--error banner--inline"
+          hidden
+        ></div>
+        <div
+          id="message-succes-compte"
+          class="banner banner--success banner--inline"
+          hidden
+        ></div>
+      </section>
 
-    <!-- =====================================================================
+      <!-- =====================================================================
          LISTE DES COMPTES EXISTANTS — TODO (Dev FS2)
          Construire un tableau. Le contenu des <tr> est injecté par main.js.
 
          *** NE PAS MODIFIER l'id ci-dessous ***
          ===================================================================== -->
-    <table>
-      <thead>
-        <!-- TODO (Dev FS2) : en-têtes (Nom d'utilisateur, Nom complet, Rôle) -->
-      </thead>
-      <tbody id="liste-comptes"></tbody>
-    </table>
-  </main>
+      <section class="panel panel--table">
+        <h2>Comptes existants</h2>
+        <table class="table-comptes">
+          <thead>
+            <!-- TODO (Dev FS2) : en-têtes (Nom d'utilisateur, Nom complet, Rôle) -->
+            <tr>
+              <th>Nom d'utilisateur</th>
+              <th>Nom complet</th>
+              <th>Rôle</th>
+            </tr>
+          </thead>
+          <tbody id="liste-comptes"></tbody>
+        </table>
+      </section>
+    </main>
 
-  <!-- NE PAS MODIFIER — scripts de connexion au backend -->
-  <script src="../functions.js"></script>
-  <script src="../main.js"></script>
-</body>
+    <!-- NE PAS MODIFIER — scripts de connexion au backend -->
+    <script src="../functions.js"></script>
+    <script src="../main.js"></script>
+  </body>
 </html>
