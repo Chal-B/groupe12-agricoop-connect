@@ -32,8 +32,9 @@
    Retourne : true si tout est valide, false sinon.
    Astuce   : "  ".trim() donne une chaîne vide "". */
 function validerFormulaireLogin(donnees) {
-  // TODO : à compléter
+  return donnees.nom_utilisateur.trim() !== "" && donnees.mot_de_passe !== "";
 }
+
 
 
 /* [Dev FS1 — Tableau de bord — niveau S7 : boucle + condition]
@@ -44,7 +45,7 @@ function validerFormulaireLogin(donnees) {
    Exemple    : compterJoursActifs({"2026-07-08": 135, "2026-07-09": 60}, 100) -> 1
    Astuce     : Object.values(livraisonsParJour) donne un tableau des quantités. */
 function compterJoursActifs(livraisonsParJour, seuil) {
-  // TODO : à compléter
+  return Object.values(livraisonsParJour).filter((quantite) => quantite > seuil).length;
 }
 
 

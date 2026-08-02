@@ -1,0 +1,65 @@
+/**
+ * RESET.CSS : remise à zéro, typographie et barres de défilement globales
+ * @author Espoir LOEMBA (Dev FS1)
+ */
+
+/* ---------- Reset ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-sans);
+  font-size: var(--texte-base);
+  line-height: 1.5;
+  letter-spacing: var(--tracking-normal);
+  color: var(--foreground);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--foreground);
+}
+
+/* ---------- Barres de défilement discrètes ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bordure-forte);
+  border-radius: var(--rayon-pilule);
+  border: 2px solid var(--card);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--texte-tres-doux);
+}

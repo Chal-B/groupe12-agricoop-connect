@@ -1,0 +1,50 @@
+/**
+ * Page Connexion — carte centrée sobre
+ * @author Espoir LOEMBA (Dev FS1)
+ */
+@import url("../styles/main.css");
+
+.page-connexion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--espace-lg);
+  background-color: var(--background);
+  background-image: var(--motif-points);
+  background-size: 14px 14px;
+}
+
+.carte-connexion {
+  width: 100%;
+  max-width: 400px;
+  padding: var(--espace-2xl);
+}
+
+.carte-connexion h1 {
+  font-size: 1.3rem;
+  text-align: center;
+  color: var(--foreground);
+}
+
+.carte-connexion .sous-titre {
+  margin-bottom: var(--espace-lg);
+  font-size: var(--texte-sm);
+  text-align: center;
+  color: var(--muted-foreground);
+}
+
+.carte-connexion .formulaire {
+  max-width: none;
+}
+
+.carte-connexion .formulaire .btn {
+  justify-self: stretch;
+}
+
+.carte-connexion .aide {
+  margin-top: var(--espace-base);
+  font-size: var(--texte-sm);
+  text-align: center;
+  color: var(--texte-tres-doux);
+}
