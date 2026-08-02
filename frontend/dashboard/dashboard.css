@@ -1,0 +1,270 @@
+/**
+ * Page Tableau de bord — cartes indicateurs, jours actifs, graphique
+ * @author Espoir LOEMBA (Dev FS1)
+ */
+@import url("../styles/main.css");
+
+/* Séparateur pointillé horizontal (le même trait qu'au-dessus de .tableau-bord) */
+:root {
+  --trait-pointille: repeating-linear-gradient(
+    to right,
+    hsl(150 24% 24% / 0.2) 0 1px,
+    transparent 1px 3px,
+    hsl(150 24% 24% / 0.2) 3px 4px,
+    transparent 4px 6px,
+    hsl(150 24% 24% / 0.2) 6px 7px,
+    transparent 7px 9px
+  );
+}
+
+@media (width > 768px) {
+  .entete-page {
+    position: static;
+  }
+}
+
+/* Séparation des sections par flex + gap */
+.conteneur {
+  display: flex;
+  flex-direction: column;
+  --gap-conteneur: var(--espace-2xl);
+  gap: var(--gap-conteneur);
+}
+
+#carte-stock,
+#carte-montant-du {
+  font-size: var(--texte-xl);
+}
+
+/* Largeurs des cartes : desktop 4 colonnes (Stock + Montant dû en 1fr, Membres actifs + Livraisons en auto, max commun) */
+#dashboard-cartes {
+  grid-template-columns: 1fr 1fr auto auto;
+  margin-bottom: 0;
+}
+
+#dashboard-cartes .carte-indicateur {
+  max-width: 280px;
+}
+
+.section-graphique {
+  width: fit-content;
+}
+
+.section-graphique h2 {
+  margin-bottom: var(--espace-xs);
+}
+
+#jours-actifs {
+  margin-bottom: var(--espace-base);
+  font-size: var(--texte-sm);
+  color: var(--texte-doux);
+}
+
+/* Séparateurs pointillés horizontaux — éléments HTML (plus de pseudo-éléments) */
+.separateur-section,
+.separateur-carte,
+.separateur-graphique {
+  border: 0;
+  height: 8px;
+  background-image: var(--trait-pointille);
+}
+
+/* Desktop : les séparateurs entre cartes / entre graphique et récap sont masqués */
+.separateur-carte,
+.separateur-graphique {
+  display: none;
+}
+
+/* Entre la grille d'indicateurs et le tableau de bord : en flux, marges compensées pour garder le même écart */
+.separateur-section {
+  width: 96%;
+  margin-inline: auto;
+  margin-block: calc(var(--espace-md) - var(--gap-conteneur));
+}
+
+@media (width <= 1024px) {
+  #dashboard-cartes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #dashboard-cartes .carte-indicateur {
+    max-width: none;
+  }
+
+  .section-graphique {
+    width: 100%;
+    position: relative;
+  }
+
+  /* Sections empilées : séparées par le même trait pointillé (même pattern que les cartes) */
+  .separateur-graphique {
+    display: block;
+    width: 94%;
+    margin-inline: auto;
+    margin-block: calc(var(--espace-md) - var(--gap-empile));
+  }
+}
+
+@media (width <= 768px) {
+  #dashboard-cartes {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Mobile : mêmes paddings / gaps que sur desktop */
+  #dashboard-cartes .carte-indicateur {
+    position: relative;
+    --padding-carte: var(--espace-lg) !important;
+  }
+
+  .tableau-bord .section {
+    --padding-section: var(--espace-lg) !important;
+  }
+
+  .section-graphique .graphique {
+    --gap-barres: var(--espace-sm) !important;
+  }
+
+  .separateur-section {
+    width: 94%;
+  }
+
+  .separateur-carte {
+    display: block;
+    width: 94%;
+    margin-inline: auto;
+    margin-block: calc(var(--espace-md) - var(--espace-lg));
+  }
+}
+
+.tableau-bord {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  --gap-empile: var(--espace-lg);
+  gap: var(--gap-empile);
+  align-items: stretch;
+  position: relative;
+}
+
+.tableau-bord .section {
+  margin-bottom: 0;
+}
+
+.tableau-bord > * {
+  min-width: 0;
+}
+
+.colonne-laterale {
+  min-width: 0;
+  display: flex;
+}
+
+/* La carte récap remplit toute la hauteur de la colonne (même taille que la carte graphique) */
+.section-activite-laterale {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.section-activite-laterale .recap-livraisons {
+  flex: 1;
+}
+
+.recap-titre-groupe h2 {
+  margin-bottom: var(--espace-xs);
+}
+
+.recap-livraisons {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: var(--espace-sm);
+  flex-basis: 100%;
+  margin-top: var(--espace-base);
+}
+
+.sous-titre-recap {
+  font-size: var(--texte-sm);
+  color: var(--texte-doux);
+}
+
+.livraison-ligne {
+  position: relative;
+  flex: 1;
+  min-height: 52px;
+}
+
+.livraison-ligne:hover {
+  border-color: var(--primaire);
+}
+
+.livraison-membre {
+  position: absolute;
+  top: var(--espace-sm);
+  left: var(--espace-md);
+  font-weight: 500;
+  color: var(--texte);
+}
+
+.livraison-culture {
+  position: absolute;
+  bottom: var(--espace-sm);
+  left: var(--espace-md);
+  font-size: var(--texte-sm);
+  color: var(--texte-doux);
+}
+
+.livraison-quantite {
+  position: absolute;
+  top: var(--espace-sm);
+  right: var(--espace-md);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--primaire);
+}
+
+.livraison-date {
+  position: absolute;
+  bottom: var(--espace-sm);
+  right: var(--espace-md);
+  font-size: var(--texte-sm);
+  color: var(--texte-doux);
+}
+
+/* Responsive : la colonne latérale passe sous le contenu principal (flex pour les marges compensées du séparateur) */
+@media (width <= 1024px) {
+  .tableau-bord {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Mobile : mêmes gaps que sur desktop (les séparateurs se recentrent via les variables) */
+@media (width <= 768px) {
+  .conteneur {
+    --gap-conteneur: var(--espace-2xl) !important;
+  }
+
+  .tableau-bord {
+    --gap-empile: var(--espace-lg) !important;
+  }
+
+  #dashboard-cartes {
+    --gap-grille: var(--espace-lg) !important;
+    gap: var(--espace-lg) !important;
+  }
+
+  /* Un peu d'espace avant le pied de page sur mobile */
+  .conteneur .tableau-bord {
+    margin-bottom: var(--espace-lg);
+  }
+}
+
+/* Note sous la valeur des cartes indicateurs */
+.carte-note {
+  margin-top: auto;
+  padding-top: var(--espace-sm);
+  font-size: var(--texte-sm);
+  color: var(--texte-tres-doux);
+}
