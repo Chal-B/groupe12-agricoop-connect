@@ -99,6 +99,23 @@ function validerFormulaireNouveauMembre(donnees) {
    Astuce   : Number("abc") vaut NaN ; Number("40") vaut 40. */
 function validerFormulaireLivraison(donnees) {
   // TODO : à compléter
+   if (donnees.membre_id === "") {
+    return false;
+  }
+
+  // Règle 2 : culture ne doit pas être vide
+  if (donnees.culture === "") {
+    return false;
+  }
+
+  // Règle 3 : quantite doit être un nombre strictement supérieur à 0
+  const quantiteNombre = Number(donnees.quantite);
+  if (isNaN(quantiteNombre) || quantiteNombre <= 0) {
+    return false;
+  }
+
+  // Tout est valide
+  return true;
 }
 
 
@@ -111,7 +128,9 @@ function validerFormulaireLivraison(donnees) {
                directement (ordre alphabétique = ordre chronologique). */
 function trierLivraisonsParDate(livraisons) {
   // TODO : à compléter
+   return [...livraisons].sort((a, b) => b.date.localeCompare(a.date));
 }
+
 
 
 /* [Dev FS4 — Paiements — niveau S7 : conditions imbriquées]
