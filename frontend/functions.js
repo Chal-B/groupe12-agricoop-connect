@@ -125,7 +125,17 @@ function validerFormulaireNouveauMembre(donnees) {
    Retourne : true si tout est valide, false sinon.
    Astuce   : Number("abc") vaut NaN ; Number("40") vaut 40. */
 function validerFormulaireLivraison(donnees) {
-  // TODO : à compléter
+  if (donnees.membre_id === "") {
+    return false;
+  }
+  if (donnees.culture === "") {
+    return false;
+  }
+  const quantiteNombre = Number(donnees.quantite);
+  if (isNaN(quantiteNombre) || quantiteNombre <= 0) {
+    return false;
+  }
+  return true;
 }
 
 /* [Dev FS3 — Livraisons — niveau S8 : tableau .sort]
@@ -136,7 +146,7 @@ function validerFormulaireLivraison(donnees) {
    Astuce    : au format "AAAA-MM-JJ", comparer les chaînes fonctionne
                directement (ordre alphabétique = ordre chronologique). */
 function trierLivraisonsParDate(livraisons) {
-  // TODO : à compléter
+  return [...livraisons].sort((a, b) => b.date.localeCompare(a.date));
 }
 
 /* [Dev FS4 — Paiements — niveau S7 : conditions imbriquées]
