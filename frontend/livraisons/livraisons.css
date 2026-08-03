@@ -1,0 +1,12 @@
+/**
+ * Page Livraisons — formulaire et tableau historique
+ * @author Beni NGASSA KI (Dev FS3)
+ */
+@import url("../styles/main.css");
+
+/* Mobile : max 2 filtres par tableau — on cache le tri */
+@media (width <= 768px) {
+  #btn-trier-livraisons {
+    display: none;
+  }
+}
