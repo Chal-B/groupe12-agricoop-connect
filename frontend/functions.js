@@ -161,7 +161,19 @@ function trierLivraisonsParDate(livraisons) {
      - mode_paiement doit être "Espèces" ou "Mobile Money"
    Retourne : true si tout est valide, false sinon. */
 function validerFormulairePaiement(donnees) {
-  // TODO : à compléter
+  if (!donnees.membre_id || String(donnees.membre_id).trim() === "") {
+    return false;
+  }
+  if (!donnees.montant || isNaN(donnees.montant) || Number(donnees.montant) <= 0) {
+    return false;
+  }
+  if (
+    !donnees.mode_paiement ||
+    (donnees.mode_paiement !== "Espèces" && donnees.mode_paiement !== "Mobile Money")
+  ) {
+    return false;
+  }
+  return true;
 }
 
 /* [Dev FS4 — Paiements — niveau S7/S8 : boucle + accumulateur]
@@ -171,7 +183,11 @@ function validerFormulairePaiement(donnees) {
    Retourne  : un nombre (la somme de tous les montants).
    Exemple   : calculerTotalPaiements([{montant:5000},{montant:3000}]) -> 8000 */
 function calculerTotalPaiements(paiements) {
-  // TODO : à compléter
+  let total = 0;
+  for (let i = 0; i < paiements.length; i++) {
+    total += paiements[i].montant || 0;
+  }
+  return total;
 }
 
 /* [Dev FS5 — Ventes & Stock — niveau S7/S8 : condition sur un nombre]
