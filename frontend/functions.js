@@ -127,6 +127,16 @@ function trierLivraisonsParDate(livraisons) {
    Retourne : true si tout est valide, false sinon. */
 function validerFormulairePaiement(donnees) {
   // TODO : à compléter
+  if(!donnees.membre_id || donnees.membre_id.trim() === "") {
+    return false;
+  }
+  if(!donnees.montant || isNaN(donnees.montant) || Number(donnees.montant) <= 0) {
+    return false;
+  }
+  if(!donnees.mode_paiement || (donnees.mode_paiement !== "Espèces" && donnees.mode_paiement !== "Mobile Money")) {
+    return false;
+  }
+  return true;
 }
 
 
@@ -138,6 +148,10 @@ function validerFormulairePaiement(donnees) {
    Exemple   : calculerTotalPaiements([{montant:5000},{montant:3000}]) -> 8000 */
 function calculerTotalPaiements(paiements) {
   // TODO : à compléter
+  let total = 0;
+  for(let i = 0; i < paiements.length; i++) {
+    total += (paiements[i].montant) || 0;
+  }
 }
 
 

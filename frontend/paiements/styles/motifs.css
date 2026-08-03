@@ -1,0 +1,20 @@
+/**
+ * MOTIFS.CSS : fonds décoratifs "points" et "grille" (style cahier)
+ * @author Espoir LOEMBA (Dev FS1)
+ */
+
+/* Fond à motifs : fine grille de points agricoles */
+.section-motif {
+  background-color: var(--card);
+  background-image: var(--motif-points);
+  background-size: 14px 14px;
+}
+
+/* Fond à motifs : grille de lignes croisées (style cahier) */
+.section-motif-grille {
+  background-color: var(--card);
+  background-image:
+    linear-gradient(hsl(150 24% 24% / 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(150 24% 24% / 0.1) 1px, transparent 1px);
+  background-size: 18px 18px;
+}

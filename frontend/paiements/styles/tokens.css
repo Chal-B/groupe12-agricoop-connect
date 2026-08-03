@@ -1,0 +1,109 @@
+/**
+ * TOKENS.CSS : variables de design partagées (surfaces, couleurs, espacements)
+ * @author Espoir LOEMBA (Dev FS1)
+ */
+
+/* ---------- Design tokens ---------- */
+:root {
+  /* Surfaces & texte */
+  --background: hsl(42 45% 98%);
+  --foreground: hsl(150 24% 16%);
+  --card: hsl(42 45% 96%);
+  --card-foreground: hsl(150 24% 16%);
+  --popover: hsl(42 45% 96%);
+  --popover-foreground: hsl(32 20% 38%);
+
+  /* Couleur principale : vert bouteille */
+  --primary: hsl(150 24% 24%);
+  --primary-foreground: hsl(42 45% 96%);
+
+  --secondary: hsl(40 35% 93%);
+  --secondary-foreground: hsl(150 24% 16%);
+  --muted: hsl(40 32% 90%);
+  --muted-foreground: hsl(32 20% 38%);
+  --accent: hsl(36 40% 90%);
+  --accent-foreground: hsl(32 30% 20%);
+  --destructive: hsl(9 50% 42%);
+  --destructive-foreground: hsl(42 45% 97%);
+
+  /* Bordures & anneaux de focus */
+  --border: hsl(38 32% 76%);
+  --input: hsl(40 30% 92%);
+  --ring: hsl(36 60% 50%);
+
+  /* Sidebar — vert bouteille profond */
+  --sidebar: hsl(150 26% 16%);
+  --sidebar-foreground: hsl(42 30% 88%);
+  --sidebar-primary: hsl(42 60% 60%);
+  --sidebar-primary-foreground: hsl(150 26% 16%);
+  --sidebar-accent: hsl(150 20% 26%);
+  --sidebar-accent-foreground: hsl(42 40% 92%);
+  --sidebar-border: hsl(150 20% 26%);
+
+  /* Alias sémantiques compatibles (CSS de page + main.js) */
+  --primaire: var(--primary);
+  --primaire-fonce: hsl(150 26% 18%);
+  --primaire-clair: hsl(36 60% 92%);
+  --texte: var(--foreground);
+  --texte-doux: var(--muted-foreground);
+  --texte-tres-doux: hsl(32 14% 52%);
+  --fond: var(--background);
+  --blanc: var(--card);
+  --bordure: var(--border);
+  --bordure-forte: hsl(34 34% 58%);
+  --danger: var(--destructive);
+  --danger-clair: hsl(9 60% 94%);
+  --accent-clair: hsl(40 30% 94%);
+
+  /* Échelle d'espacement 8pt */
+  --espace-xs: 4px;
+  --espace-sm: 8px;
+  --espace-md: 12px;
+  --espace-base: 16px;
+  --espace-lg: 24px;
+  --espace-xl: 32px;
+  --espace-2xl: 40px;
+  --espace-3xl: 48px;
+
+  /* Alias conservés pour la compatibilité */
+  --espace: var(--espace-base);
+  --espace-2: var(--espace-sm);
+  --espace-4: var(--espace-lg);
+
+  /* Échelle typographique modulaire */
+  --texte-xs: 0.75rem;
+  --texte-sm: 0.8125rem;
+  --texte-base: 0.875rem;
+  --texte-md: 1rem;
+  --texte-lg: 1.125rem;
+  --texte-xl: 1.5rem;
+  --texte-2xl: 1.75rem;
+
+  /* Rayons */
+  --radius: 0.375rem;
+  --rayon: var(--radius);
+  --rayon-carte: 0.5rem;
+  --rayon-pilule: 999px;
+
+  /* Ombres : désactivées (style plat, bordure seule) */
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --ombre: none;
+  --ombre-forte: none;
+
+  /* Hachures diagonales (barres de graphique et de stock) */
+  --hachures: repeating-linear-gradient(
+    -45deg,
+    hsl(150 24% 24% / 0.12) 0 2px,
+    transparent 2px 4px
+  );
+
+  /* Motif de points (cartes décoratives) */
+  --motif-points: radial-gradient(hsl(150 24% 24% / 0.14) 1.5px, transparent 1.5px);
+
+  --tracking-normal: 0.025em;
+  --transition: 0.15s ease;
+  --font-sans: "Source Sans 3", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+}
