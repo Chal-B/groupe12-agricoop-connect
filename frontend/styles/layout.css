@@ -273,9 +273,12 @@ table {
 
 /* ---------- Pied de page ---------- */
 .pied {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--espace-sm);
   padding: var(--espace-lg);
   font-size: var(--texte-sm);
-  text-align: center;
   color: var(--texte-tres-doux);
   background: var(--card);
   border-top: 1px solid var(--border);
