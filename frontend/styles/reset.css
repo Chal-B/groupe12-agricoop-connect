@@ -48,18 +48,27 @@ h1, h2, h3, h4 {
   color: var(--foreground);
 }
 
-/* ---------- Barres de défilement discrètes ---------- */
+/* ---------- Barres de défilement discrètes (gris semi-transparent, moderne) ---------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(0 0% 45% / 0.5) transparent;
+}
+
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--bordure-forte);
+  background: hsla(130, 5%, 24%, 0.5);
   border-radius: var(--rayon-pilule);
-  border: 2px solid var(--card);
+  border: 0px solid transparent;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--texte-tres-doux);
+  background: hsl(0 0% 45% / 0.7);
 }

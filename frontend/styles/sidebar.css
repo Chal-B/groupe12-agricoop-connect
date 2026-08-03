@@ -5,35 +5,26 @@
 
 /* ---------- Sidebar (navigation sur les 7 pages, hors login) ---------- */
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
   z-index: 40;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  flex: 0 0 256px;
   width: 256px;
   padding: var(--espace-lg) var(--espace-md);
   background: var(--sidebar);
   border-right: 1px solid var(--sidebar-border);
 
   /* Mobile : panneau coulissant caché derrière le bord gauche */
-  @media (width <= 768px) {
+  @media (width <=768px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
     width: 272px;
     max-width: 85vw;
     transform: translateX(-100%);
     transition: transform 0.2s ease;
     z-index: 50;
-  }
-
-  /* Desktop : décalage du contenu à droite de la sidebar */
-  @media (width > 768px) {
-    & ~ .conteneur,
-    & ~ .pied {
-      margin-left: 256px;
-      width: calc(100% - 256px);
-    }
   }
 }
 
@@ -49,8 +40,6 @@
   white-space: nowrap;
   color: var(--sidebar-foreground);
   border-bottom: 1px solid var(--sidebar-border);
-  position: sticky;
-  top: 0;
 }
 
 .logo svg {
@@ -65,22 +54,22 @@
   text-decoration: none;
 }
 
-.nav-groupe + .nav-groupe {
+.nav-groupe+.nav-groupe {
   /* margin-top: calc(var(--espace-base) -2rem); */
 }
 
-/* Conteneur unique des groupes : pousse la session en bas de la sidebar */
+/* Zone des groupes : liens + session défilent ensemble, rien n'est collé en bas */
 .nav-contenu {
   flex: 1 1 auto;
-  /* height: 0; */
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  /* overflow-y: auto; */
+  overflow-y: auto;
 }
 
-/* Groupe poussé en bas, au-dessus de la barre de session */
-.nav-groupe-pousse {
-  margin-top: auto;
+/* Sous-bloc des groupes : occupe toute la hauteur de la nav-contenu */
+.nav-groupes {
+  flex: 1 1 auto;
 }
 
 .nav-titre {
@@ -141,6 +130,7 @@
 /* Barre de session : carte utilisateur en bas de la sidebar
    (main.js remplit #utilisateur-connecte, ne pas modifier les ids) */
 .session-bar {
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: var(--espace-sm);
@@ -204,11 +194,9 @@
   height: 6px;
   width: 96%;
   margin: 0 auto;
-  background: repeating-linear-gradient(
-    -45deg,
-    hsl(0 0% 100% / 0.3) 0 1px,
-    transparent 1px 3px
-  );
+  background: repeating-linear-gradient(-45deg,
+      hsl(0 0% 100% / 0.3) 0 1px,
+      transparent 1px 3px);
   background-size: 100% 100%;
 }
 
@@ -229,7 +217,7 @@
 .menu-burger-icone {
   display: none;
 
-  @media (width <= 768px) {
+  @media (width <=768px) {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
@@ -253,7 +241,7 @@
 .voile {
   display: none;
 
-  @media (width <= 768px) {
+  @media (width <=768px) {
     position: fixed;
     inset: 0;
     z-index: 45;
@@ -263,12 +251,12 @@
 
 /* Ouverture du menu via la checkbox (mobile uniquement) */
 .menu-burger:checked {
-  @media (width <= 768px) {
-    & ~ .navbar {
+  @media (width <=768px) {
+    &~.navbar {
       transform: translateX(0);
     }
 
-    & ~ .voile {
+    &~.voile {
       display: block;
     }
   }

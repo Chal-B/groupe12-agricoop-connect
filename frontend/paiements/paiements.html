@@ -8,14 +8,16 @@
 </head>
 <body>
 
-  <!-- NAVIGATION (Dev FS4) — sidebar -->
-  <input type="checkbox" id="menu-burger" class="menu-burger">
-  <nav class="navbar">
+  <div class="app">
+    <!-- NAVIGATION (Dev FS4) — sidebar -->
+    <input type="checkbox" id="menu-burger" class="menu-burger">
+    <nav class="navbar">
     <a class="logo" href="../dashboard/dashboard.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3C9.2 5.5 8.8 8.5 10 10.6C11 12.2 13 12.2 14 10.6C15.2 8.5 14.8 5.5 12 3Z"/><path d="M3 12C5.5 9.2 8.5 8.8 10.6 10C12.2 11 12.2 13 10.6 14C8.5 15.2 5.5 14.8 3 12Z"/><path d="M21 12C18.5 9.2 15.5 8.8 13.4 10C11.8 11 11.8 13 13.4 14C15.5 15.2 18.5 14.8 21 12Z"/><path d="M12 12C12 15 10.5 17 9 18.5"/></svg>
       AgriCoop Connect
     </a>
-    <div class="nav-contenu">
+    <section class="nav-contenu">
+    <div class="nav-groupes">
     <div class="nav-groupe">
       <p class="nav-titre">Principal</p>
       <ul class="nav-links">
@@ -72,10 +74,12 @@
         </button>
       </div>
     </div>
+    </section>
   </nav>
-  <label for="menu-burger" class="voile" aria-hidden="true"></label>
+    <label for="menu-burger" class="voile" aria-hidden="true"></label>
 
-  <main class="conteneur">
+    <aside class="contenu-principal">
+      <main class="conteneur">
     <div class="zone-nouveau-paiement">
       <input type="checkbox" id="toggle-nouveau-paiement" class="toggle-modal">
 
@@ -179,9 +183,11 @@
         </table>
       </div>
     </section>
-  </main>
+      </main>
 
-  <footer class="pied">AgriCoop Connect — Coopérative COMAKI, Kintélé</footer>
+      <footer class="pied">AgriCoop Connect — Coopérative COMAKI, Kintélé</footer>
+    </aside>
+  </div>
 
   <!-- NE PAS MODIFIER — scripts de connexion au backend -->
   <script src="../functions.js"></script>

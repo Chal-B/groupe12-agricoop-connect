@@ -18,26 +18,6 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-/* Sidebar non scrollable : tous les liens restent visibles */
-.navbar {
-  overflow: hidden;
-}
-
-.nav-contenu {
-  overflow: hidden;
-  flex: 1 1 auto;
-  min-height: 0;
-}
-
-.nav-links li {
-  padding-block: 6px;
-}
-
-.session-bar {
-  flex-shrink: 0;
-  margin-top: auto;
-}
-
 :root {
   --fond-opaque: hsl(42 45% 99%);
 }

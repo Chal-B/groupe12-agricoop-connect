@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="membres.css" />
   </head>
   <body>
-    <!-- NAVIGATION (Dev FS2) — sidebar -->
-    <input type="checkbox" id="menu-burger" class="menu-burger" />
-    <nav class="navbar">
+    <div class="app">
+      <!-- NAVIGATION (Dev FS2) — sidebar -->
+      <input type="checkbox" id="menu-burger" class="menu-burger" />
+      <nav class="navbar">
       <a class="logo" href="../dashboard/dashboard.html">
         <svg
           viewBox="0 0 24 24"
@@ -33,7 +34,8 @@
         </svg>
         AgriCoop Connect
       </a>
-      <div class="nav-contenu">
+      <section class="nav-contenu">
+      <div class="nav-groupes">
         <div class="nav-groupe">
           <p class="nav-titre">Principal</p>
           <ul class="nav-links">
@@ -213,10 +215,12 @@
           </button>
         </div>
       </div>
+      </section>
     </nav>
-    <label for="menu-burger" class="voile" aria-hidden="true"></label>
+      <label for="menu-burger" class="voile" aria-hidden="true"></label>
 
-    <main class="conteneur">
+      <aside class="contenu-principal">
+        <main class="conteneur">
       <input type="checkbox" id="toggle-nouveau-membre" class="toggle-modal" />
 
       <div class="zone-nouveau-membre">
@@ -373,9 +377,11 @@
         class="modal-voile"
         aria-hidden="true"
       ></label>
-    </main>
+        </main>
 
-    <footer class="pied">AgriCoop Connect — Coopérative COMAKI, Kintélé</footer>
+        <footer class="pied">AgriCoop Connect — Coopérative COMAKI, Kintélé</footer>
+      </aside>
+    </div>
 
     <!-- NE PAS MODIFIER — scripts de connexion au backend -->
     <script src="../functions.js"></script>
