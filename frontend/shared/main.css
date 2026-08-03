@@ -1,7 +1,7 @@
 /**
  * MAIN.CSS : point d'entrée du mini-framework de styles partagés
  * AgriCoop Connect — style "Terre & agriculture".
- * Les CSS de page font @import url("../styles/main.css") pour recevoir tout
+ * Les CSS de page font @import url("../shared/main.css") pour recevoir tout
  * le design system (ordres de cascade identiques à l'ancien base.css).
  * @author Espoir LOEMBA (Dev FS1)
  */

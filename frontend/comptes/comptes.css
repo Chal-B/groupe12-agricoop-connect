@@ -2,7 +2,7 @@
  * Page Comptes — réservée à la Secrétaire
  * @author Grasty SAMBA DINAULT (Dev FS2)
  */
-@import url("../styles/main.css");
+@import url("../shared/main.css");
 
 /* Accès refusé : main.js passe form.hidden = true → on masque tout le bloc */
 #form-nouveau-compte[hidden] {

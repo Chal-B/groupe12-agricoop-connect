@@ -2,7 +2,7 @@
  * Page Membres — filtres, liste, formulaire nouveau membre
  * @author Grasty SAMBA DINAULT (Dev FS2)
  */
-@import url("../styles/main.css");
+@import url("../shared/main.css");
 
 /* Sous-titre aligné sous le titre dans le même bloc */
 
@@ -71,4 +71,4 @@
   }
 }
 
-/* ---------- Modal "Nouveau membre" (classes génériques de styles/main.css) ---------- */
+/* ---------- Modal "Nouveau membre" (classes génériques de shared/main.css) ---------- */

@@ -2,9 +2,9 @@
  * Page Statistiques — rapport, cultures, classement, top acheteur
  * @author Saint Chalbher y (Dev FS6)
  */
-@import url("../styles/main.css");
+@import url("../shared/main.css");
 
-/* Masquer la barre de défilement de la page (sans modifier styles/) */
+/* Masquer la barre de défilement de la page (sans modifier shared/) */
 html,
 body {
   scrollbar-width: none;
