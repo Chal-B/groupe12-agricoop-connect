@@ -173,7 +173,13 @@ function calculerTotalPaiements(paiements) {
      - 50 kg ou plus       -> "Disponible"
    Retourne : une chaîne de caractères. */
 function getBadgeStock(quantiteDisponible) {
-  // TODO : à compléter
+  if (quantiteDisponible <= 0) {
+    return "Épuisé";
+  }
+  if (quantiteDisponible < 50) {
+    return "Stock faible";
+  }
+  return "Disponible";
 }
 
 /* [Dev FS5 — fonction transverse — niveau S8 : propriétés d'objet + formatage]
@@ -183,7 +189,7 @@ function getBadgeStock(quantiteDisponible) {
    Retourne  : une chaîne de caractères, le nombre suivi de " FCFA".
    Exemple   : formaterMontant(23000) -> "23000 FCFA" */
 function formaterMontant(montant) {
-  // TODO : à compléter
+  return montant + " FCFA";
 }
 
 /* [Dev FS6 — Statistiques — niveau S8 : tableau .sort]
@@ -192,7 +198,9 @@ function formaterMontant(montant) {
    Paramètre : classement (tableau d'objets), chaque élément a .volume_total (nombre)
    Retourne  : le tableau trié par .volume_total décroissant. */
 function trierClassementParVolume(classement) {
-  // TODO : à compléter
+  return classement.slice().sort(function (a, b) {
+    return b.volume_total - a.volume_total;
+  });
 }
 
 /* [Dev FS6 — fonction transverse — niveau S8 : propriétés d'objet + formatage]
@@ -202,7 +210,8 @@ function trierClassementParVolume(classement) {
    Retourne  : une chaîne au format "12/07/2026".
    Astuce    : dateStr.split("-") donne ["2026", "07", "12"]. */
 function formaterDate(dateStr) {
-  // TODO : à compléter
+  var parts = dateStr.split("-");
+  return parts[2] + "/" + parts[1] + "/" + parts[0];
 }
 
 /* NE PAS MODIFIER — rend vos fonctions accessibles à main.js et aux tests */
