@@ -1,0 +1,699 @@
+/**
+ * COMPONENTS.CSS : composants d'interface réutilisables (boutons, formulaires,
+ * modales, filtres, badges, messages, tableaux, graphique en barres et barres
+ * de stock).
+ *
+ * Boutons
+ * @author Espoir LOEMBA (Dev FS1)
+ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-sm);
+  height: 40px;
+  padding: 0 18px;
+  border: 1px solid transparent;
+  border-radius: var(--rayon);
+  font-family: inherit;
+  font-size: var(--texte-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px hsl(36 60% 50% / 0.35);
+}
+
+/* Anneau de focus : motif commun (outline + halo), couleur par contexte */
+.formulaire input:focus,
+.formulaire select:focus,
+.filtres select:focus,
+.filtres input:focus,
+.formulaire-modal select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--anneau);
+}
+
+.btn-primaire {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.btn-primaire:hover {
+  background: var(--primaire-fonce);
+}
+
+.btn-secondaire {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  border-color: var(--border);
+}
+
+.btn-secondaire:hover {
+  background: var(--accent);
+}
+
+.btn-danger {
+  background: var(--destructive);
+  color: var(--destructive-foreground);
+}
+
+.btn-danger:hover {
+  filter: brightness(0.94);
+}
+
+/* Bouton "Ajouter" dans les barres de filtres / zones d'en-tête */
+.btn-ajouter {
+  flex: 0 0 auto;
+
+  /* Mobile : bouton d'ajout en bouton flottant en bas de l'écran */
+  @media (width <= 768px) {
+    position: fixed;
+    bottom: calc(var(--espace-lg) + var(--espace-sm));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    height: 48px;
+    width: 80%;
+    white-space: nowrap;
+    box-shadow: 0 6px 20px hsl(150 24% 24% / 0.35);
+  }
+}
+
+/**
+ * Formulaires, Modales (toggle check CSS, sans JS), Barres de filtres & sélecteurs uniformes
+ * @author Grasty SAMBA DINAULT (Dev FS2)
+ */
+.formulaire {
+  display: grid;
+  gap: var(--espace-base);
+  --largeur-formulaire: 560px;
+  max-width: var(--largeur-formulaire);
+
+  @media (width <= 480px) {
+    --largeur-formulaire: none;
+  }
+}
+
+/* Champs de formulaire : gabarit commun (hauteur, police, arrondi, transition) */
+.formulaire input,
+.formulaire select,
+.filtres select,
+.filtres input,
+.formulaire-modal select {
+  height: 40px;
+  font-family: inherit;
+  font-size: var(--texte-base);
+  border-radius: var(--rayon);
+  transition: var(--transition);
+}
+
+.formulaire input,
+.formulaire select {
+  width: 100%;
+  padding: 0 var(--espace-md);
+  color: var(--foreground);
+  background: var(--input);
+  border: 1px solid var(--border);
+}
+
+.formulaire input::placeholder {
+  color: var(--texte-tres-doux);
+}
+
+.formulaire input:focus,
+.formulaire select:focus {
+  --anneau: hsl(36 60% 50% / 0.22);
+  border-color: var(--ring);
+}
+
+.formulaire .btn {
+  justify-self: start;
+}
+
+/* Structure attendue (hack checkbox, zéro script) :
+   <input type="checkbox" id="toggle-xxx" class="toggle-modal">
+   ... page ...
+   <div class="modal-conteneur"><div class="modal-carte">...</div></div>
+   <label for="toggle-xxx" class="modal-voile"></label>
+   Les boutons d'ouverture sont des <label for="toggle-xxx"> stylés en .btn. */
+
+.toggle-modal {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-conteneur,
+.modal-voile {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.modal-voile {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background-color: hsl(0 0% 0% / 0.25);
+  background-image: radial-gradient(hsl(0 0% 0% / 0.12) 1.5px, transparent 1.5px);
+  background-size: 16px 16px;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.modal-conteneur {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  padding: var(--espace-lg);
+}
+
+.toggle-modal:checked ~ .modal-voile,
+.toggle-modal:checked ~ .modal-conteneur {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* La carte glisse légèrement vers le haut à l'apparition */
+.modal-conteneur .modal-carte {
+  transform: translateY(8px) scale(0.98);
+  transition: transform 0.2s ease;
+}
+
+.toggle-modal:checked ~ .modal-conteneur .modal-carte {
+  transform: translateY(0) scale(1);
+}
+
+.modal-carte {
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* En-tête du modal : icône + titre + bouton fermer */
+.modal-entete {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--espace-base);
+  padding: var(--espace-lg) var(--espace-lg) var(--espace-base);
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-titre {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espace-md);
+}
+
+.modal-titre h2 {
+  margin: 0;
+  font-size: var(--texte-lg);
+}
+
+.modal-titre p {
+  margin-top: 2px;
+  font-size: var(--texte-sm);
+  color: var(--muted-foreground);
+}
+
+.modal-fermer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  margin: -4px -4px 0 0;
+  border: 1px solid var(--border);
+  border-radius: var(--rayon);
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.modal-fermer:hover {
+  background: var(--accent);
+  color: var(--foreground);
+}
+
+.modal-fermer svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Corps du modal : formulaire */
+.modal-carte form {
+  padding: var(--espace-lg) var(--espace-lg) 0;
+  max-width: none;
+}
+
+.modal-carte .message {
+  margin: 0 var(--espace-lg) var(--espace-lg);
+}
+
+.champ-champ {
+  display: grid;
+  gap: 6px;
+}
+
+.champ-champ label {
+  font-size: var(--texte-sm);
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+/* Champ occupant toute la largeur du formulaire modal */
+.champ-plein {
+  grid-column: 1 / -1;
+}
+
+/* Champs blancs, alignés sur le modèle des selects */
+.modal-carte .formulaire input {
+  background-color: var(--blanc);
+  border-color: var(--bordure-forte);
+}
+
+/* Rangée d'actions : séparateur pleine largeur + boutons côte à côte */
+.actions-formulaire {
+  display: flex;
+  gap: var(--espace-base);
+  grid-column: 1 / -1;
+  margin: var(--espace-lg) calc(-1 * var(--espace-lg)) 0;
+  padding: var(--espace-lg);
+  border-top: 1px solid var(--border);
+}
+
+.actions-formulaire .btn {
+  flex: 1;
+}
+
+/* Formulaire en 2 colonnes dans les modales */
+.formulaire-modal {
+  display: grid;
+  gap: var(--espace-md);
+  --colonnes-modal: 1fr 1fr;
+  grid-template-columns: var(--colonnes-modal);
+
+  @media (width <= 600px) {
+    --colonnes-modal: 1fr;
+  }
+}
+
+/* États ouvert / focus des selects de modale (gérés avec les filtres) */
+/* Bouton "Annuler" : contour + texte rouge */
+.modal-carte .btn-fermer {
+  background: transparent;
+  color: var(--destructive);
+  border-color: hsl(9 50% 60%);
+}
+
+.modal-carte .btn-fermer:hover {
+  background: var(--danger-clair);
+}
+
+.filtres {
+  --marge-basse-filtres: var(--espace-sm);
+  margin-bottom: var(--marge-basse-filtres);
+
+  @media (width <= 768px) {
+    --marge-basse-filtres: var(--espace-base);
+  }
+}
+
+/* Sélecteurs uniformes (modèle "Tous les statuts") : filtres + modales */
+.filtres select,
+.formulaire-modal select {
+  padding-inline: var(--espace-md) calc(var(--espace-md) * 3);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  color: var(--texte);
+  background-color: var(--blanc);
+  border: 1px solid var(--bordure-forte);
+}
+
+.filtres select {
+  flex: 0 0 auto;
+  field-sizing: content;
+  min-width: fit-content;
+}
+
+.filtres select:open,
+.formulaire-modal select:open {
+  border-color: var(--primaire);
+}
+
+.filtres select:focus,
+.filtres input:focus,
+.formulaire-modal select:focus {
+  --anneau: hsl(150 24% 24% / 0.15);
+  border-color: var(--primaire);
+}
+
+.filtres input {
+  flex: 0 0 auto;
+  margin-left: auto;
+  --largeur-filtre: min(320px, 100%);
+  width: var(--largeur-filtre);
+  padding-inline: calc(var(--espace-md) * 3) var(--espace-md);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 12px center;
+  background-size: 16px;
+  color: var(--texte);
+  background-color: var(--blanc);
+  border: 1px solid var(--bordure-forte);
+
+  @media (width <= 768px) {
+    --largeur-filtre: min(220px, 100%);
+  }
+}
+
+/**
+ * Badges, Messages, Tableaux, Lignes de liste cliquables
+ * @author Beni NGASSA KI (Dev FS3)
+ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  width: fit-content;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: var(--rayon-pilule);
+  font-size: var(--texte-xs);
+  font-weight: 500;
+  background: transparent;
+  color: var(--muted-foreground);
+  border: 1px solid color-mix(in srgb, var(--bordure-forte) 40%, transparent);
+}
+
+.badge.ok {
+  color: var(--primaire);
+  border-color: color-mix(in srgb, hsl(150 24% 24%) 40%, transparent);
+}
+
+.badge.alerte {
+  color: var(--danger);
+  border-color: color-mix(in srgb, hsl(9 50% 45%) 40%, transparent);
+}
+
+.message {
+  margin: var(--espace-base) 0;
+  padding: var(--espace-md) var(--espace-base);
+  border: 1px solid;
+  border-radius: var(--rayon-carte);
+  font-size: var(--texte-base);
+}
+
+.message.erreur {
+  background: var(--danger-clair);
+  border-color: hsl(9 50% 85%);
+  color: var(--destructive);
+}
+
+.message.succes {
+  background: var(--primaire-clair);
+  border-color: hsl(36 50% 82%);
+  color: var(--primaire);
+}
+
+.message ul {
+  margin-left: 18px;
+}
+
+.tableau-defilant {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+
+/* Étiquette de colonne : petit libellé en capitales (en-têtes tableau/bento) */
+thead th,
+.bento-stat h3 {
+  font-size: var(--texte-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* En-tête de colonnes */
+thead th {
+  padding: var(--espace-md) var(--espace-base);
+  text-align: left;
+  color: var(--muted-foreground);
+  background: var(--muted);
+}
+
+/* Colonne numéro : largeur fixe (inspirée du tableau membres) */
+thead th:first-child,
+tbody tr::before {
+  width: 32px;
+}
+
+/* Numérotation automatique des lignes (tableaux + liste membres, injectés par main.js) */
+tbody,
+#liste-membres {
+  counter-reset: ligne;
+}
+
+tbody tr,
+.membre-ligne {
+  counter-increment: ligne;
+}
+
+tbody tr::before,
+.membre-ligne::before {
+  content: counter(ligne, decimal-leading-zero);
+  font-size: var(--texte-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--texte-tres-doux);
+}
+
+tbody tr::before {
+  display: table-cell;
+  padding: var(--espace-md) var(--espace-base);
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+tbody td {
+  padding: var(--espace-md) var(--espace-base);
+  font-size: var(--texte-base);
+  border-bottom: 1px solid var(--border);
+}
+
+tbody tr:last-child td,
+tbody tr:last-child::before {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: var(--muted);
+}
+
+/* Base commune : .livraison-ligne (dashboard) et #classement-membres li (statistiques) */
+#classement-membres li,
+.livraison-ligne {
+  padding: var(--espace-sm) var(--espace-md);
+  background: var(--blanc);
+  border: 1px solid var(--border);
+  border-radius: var(--rayon);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+#classement-membres li:hover,
+.livraison-ligne:hover {
+  transform: translateX(4px);
+}
+
+/**
+ * Liste membres (injectée par main.js)
+ * @author Grasty SAMBA DINAULT (Dev FS2)
+ */
+.membre-ligne {
+  display: grid;
+  --colonnes-membre: 32px repeat(5, 1fr);
+  grid-template-columns: var(--colonnes-membre);
+  justify-content: space-between;
+  gap: var(--espace-md);
+  align-items: center;
+  padding: var(--espace-md) var(--espace-xs);
+  border-bottom: 1px solid var(--border);
+
+  @media (width <= 768px) {
+    --colonnes-membre: 1fr 1fr;
+
+    strong {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (width <= 480px) {
+    --colonnes-membre: 1fr;
+  }
+}
+
+.membre-ligne:last-child {
+  border-bottom: none;
+}
+
+.membre-ligne .village,
+.membre-ligne .contact {
+  font-size: var(--texte-sm);
+  color: var(--muted-foreground);
+}
+
+.membre-ligne span:last-child {
+  justify-self: start;
+  width: fit-content;
+  font-weight: 600;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/**
+ * Graphique en barres (main.js génère .barre)
+ * @author Espoir LOEMBA (Dev FS1)
+ */
+.graphique {
+  display: flex;
+  align-items: flex-end;
+  --gap-barres: var(--espace-sm);
+  gap: var(--gap-barres);
+  min-height: 180px;
+  padding-top: var(--espace-lg);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+
+  /* Barres du graphique : adaptatives, tiennent dans la largeur mobile */
+  @media (width <= 768px) {
+    --gap-barres: 2px;
+  }
+}
+
+.barre {
+  position: relative;
+  flex: 1;
+  --largeur-min-barre: 12px;
+  min-width: var(--largeur-min-barre);
+  min-height: 4px;
+  background: var(--primary);
+  border-radius: 4px 4px 2px 2px;
+  transition: var(--transition);
+
+  @media (width <= 768px) {
+    --largeur-min-barre: 4px;
+  }
+}
+
+.barre::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: calc(180px - var(--espace-lg) - 100%);
+  border-radius: 30px 16px 0 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-image: var(--hachures);
+}
+
+.barre:hover {
+  background: var(--ring);
+}
+
+/**
+ * Barres de stock (main.js génère les .barre-stock-*)
+ * @author Saint Chalbher y (Dev FS5)
+ */
+.barre-stock-fond {
+  height: 8px;
+  margin-top: var(--espace-md);
+  overflow: hidden;
+  background: var(--muted);
+  background-image: var(--hachures);
+  border-radius: var(--rayon-pilule);
+}
+
+.barre-stock-remplissage {
+  height: 100%;
+  background: var(--primary);
+  border-radius: var(--rayon-pilule);
+}
+
+/**
+ * Carte indicateur — variante "total versé" (motif pointillé, valeur en vert),
+ * réutilise .carte-indicateur (layout.css)
+ * @author Dubien NGASSAI NDONG O (Dev FS4)
+ */
+.carte-total {
+  margin-bottom: var(--espace-2xl);
+  background-image: radial-gradient(hsl(150 24% 24% / 0.1) 1.5px, transparent 1.5px);
+  background-size: 16px 16px;
+}
+
+.carte-total .carte-valeur {
+  color: var(--primaire);
+}
+
+.total-titre {
+  font-size: var(--texte-sm);
+  color: var(--texte-tres-doux);
+}
+
+/**
+ * Grille bento & carte bento (base du classement/rapport des statistiques)
+ * @author Saint Chalbher y (Dev FS6)
+ */
+.grille-bento {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--espace-lg);
+  align-items: stretch;
+}
+
+.grille-bento > * {
+  min-width: 0;
+}
+
+.bento-carte {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-base);
+  --padding-carte: var(--espace-lg);
+  padding: var(--padding-carte);
+
+  @media (width <= 768px) {
+    /* Mobile : sections tableau sans carte, sans fond ni bordure */
+    &.sans-carte {
+      --padding-carte: 0;
+      background: none;
+      border: none;
+    }
+  }
+}
+
+.bento-carte h2 {
+  margin: 0;
+}
