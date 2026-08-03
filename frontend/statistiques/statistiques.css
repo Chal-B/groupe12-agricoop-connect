@@ -1,0 +1,323 @@
+/**
+ * Page Statistiques — rapport, cultures, classement, top acheteur
+ * @author Saint Chalbher y (Dev FS6)
+ */
+@import url("../styles/main.css");
+
+/* Masquer la barre de défilement de la page (sans modifier styles/) */
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* Sidebar non scrollable : tous les liens restent visibles */
+.navbar {
+  overflow: hidden;
+}
+
+.nav-contenu {
+  overflow: hidden;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.nav-links li {
+  padding-block: 6px;
+}
+
+.session-bar {
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+:root {
+  --fond-opaque: hsl(42 45% 99%);
+}
+
+/* Desktop : l'en-tête de page reste en place au défilement (mobile : collé) */
+@media (width > 768px) {
+  .entete-page {
+    position: static;
+  }
+}
+
+/* Extension grille-bento (FS6) */
+.bento-pleine {
+  grid-column: 1 / -1;
+}
+
+.bento-classement {
+  grid-column: span 4;
+}
+
+.bento-top {
+  grid-column: span 2;
+}
+
+.bento-entete {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espace-base);
+  margin-bottom: var(--espace-base);
+}
+
+.bento-entete h2 {
+  margin: 0 0 var(--espace-xs);
+}
+
+.bento-sous-titre {
+  margin: 0;
+  font-size: var(--texte-sm);
+  font-weight: 400;
+  color: var(--muted-foreground);
+}
+
+.bento-icone-or {
+  background: hsl(36 40% 88%);
+  color: hsl(36 50% 35%);
+}
+
+.bento-carte.section-motif,
+.bento-carte.section-motif-grille {
+  margin-bottom: 0;
+}
+
+.grille-bento {
+  margin-bottom: var(--espace-2xl);
+}
+
+#classement-membres,
+#top-acheteur,
+.tableau-wrap table {
+  background: var(--fond-opaque);
+  border: 1px solid var(--border);
+  border-radius: var(--rayon-carte);
+  overflow: hidden;
+}
+
+.tableau-wrap {
+  overflow-x: auto;
+}
+
+.tableau-wrap thead th {
+  background: var(--muted);
+}
+
+.tableau-wrap tbody td,
+.tableau-wrap tbody tr::before {
+  background-color: var(--fond-opaque);
+}
+
+.tableau-wrap tbody tr:hover td,
+.tableau-wrap tbody tr:hover::before {
+  background-color: var(--muted);
+}
+
+#classement-membres {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: rang;
+  flex: 1;
+}
+
+#classement-membres li {
+  counter-increment: rang;
+  display: flex;
+  align-items: center;
+  gap: var(--espace-md);
+  padding: var(--espace-md) var(--espace-base);
+  border-bottom: 1px solid var(--border);
+  font-size: var(--texte-base);
+  color: var(--foreground);
+  background: var(--fond-opaque);
+}
+
+#classement-membres li:last-child {
+  border-bottom: 0;
+}
+
+#classement-membres li:hover {
+  background: var(--muted);
+}
+
+#classement-membres li::before {
+  content: counter(rang);
+  display: grid;
+  place-items: center;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  border-radius: var(--rayon);
+  background: var(--muted);
+  color: var(--muted-foreground);
+  font-size: var(--texte-xs);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+#classement-membres li:nth-child(1) {
+  background: hsl(36 50% 94%);
+}
+
+#classement-membres li:nth-child(1)::before {
+  background: var(--sidebar-primary);
+  color: var(--sidebar-primary-foreground);
+}
+
+#classement-membres li:nth-child(2)::before {
+  background: hsl(38 12% 72%);
+  color: var(--foreground);
+}
+
+#classement-membres li:nth-child(3)::before {
+  background: hsl(28 35% 72%);
+  color: var(--foreground);
+}
+
+#top-acheteur {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-md);
+  margin: 0;
+  padding: var(--espace-md) var(--espace-base);
+  font-size: var(--texte-base);
+  font-weight: 500;
+  color: var(--foreground);
+  background: hsl(36 50% 94%);
+}
+
+#top-acheteur::before {
+  content: "1";
+  display: grid;
+  place-items: center;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  border-radius: var(--rayon);
+  background: var(--sidebar-primary);
+  color: var(--sidebar-primary-foreground);
+  font-size: var(--texte-xs);
+  font-weight: 700;
+}
+
+#top-acheteur:empty::after {
+  content: "En attente des données…";
+  color: var(--muted-foreground);
+  font-weight: 400;
+}
+
+.indicateurs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--espace-base);
+  margin: 0;
+}
+
+.indicateur {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-sm);
+  padding: var(--espace-base);
+  background: var(--fond-opaque);
+  border: 1px solid var(--border);
+  border-radius: var(--rayon-carte);
+}
+
+.indicateur dt {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-sm);
+  margin: 0;
+  font-size: var(--texte-sm);
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+.indicateur dt svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: var(--sidebar-primary);
+}
+
+.indicateur dd {
+  margin: 0;
+  font-size: var(--texte-xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 1100px) {
+  .indicateurs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bento-classement,
+  .bento-top {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .grille-bento {
+    grid-template-columns: 1fr;
+  }
+
+  .bento-pleine,
+  .bento-classement,
+  .bento-top {
+    grid-column: 1;
+  }
+
+  .indicateurs {
+    grid-template-columns: 1fr;
+  }
+
+  .bento-entete {
+    gap: var(--espace-sm);
+  }
+
+  .indicateur dd {
+    font-size: var(--texte-lg);
+  }
+
+  .tableau-wrap {
+    margin: 0;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .tableau-wrap table {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+  }
+
+  .tableau-wrap thead th,
+  .tableau-wrap tbody td,
+  .tableau-wrap tbody tr::before {
+    padding: 8px 4px;
+    font-size: 0.6875rem;
+    letter-spacing: 0.02em;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .tableau-wrap thead th:first-child,
+  .tableau-wrap tbody tr::before {
+    width: 1.75rem;
+    padding-inline: 2px;
+  }
+}

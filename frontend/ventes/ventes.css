@@ -1,0 +1,72 @@
+/**
+ * Page Ventes & Stock — cartes de stock et tableau des ventes
+ * @author Saint Chalbher y (Dev FS5)
+ */
+@import url("../styles/main.css");
+
+/* Masquer la barre de défilement de la page (sans modifier styles/) */
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* Sidebar non scrollable : tous les liens restent visibles */
+.navbar {
+  overflow: hidden;
+}
+
+.nav-contenu {
+  overflow: hidden;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.nav-links li {
+  padding-block: 6px;
+}
+
+.session-bar {
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+/* Desktop : l'en-tête de page reste en place au défilement (mobile : collé) */
+@media (width > 768px) {
+  .entete-page {
+    position: static;
+  }
+}
+
+#cartes-stock {
+  display: grid;
+  gap: var(--espace-base);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* Icône feuille décorative sur chaque carte de stock (contenu injecté par main.js) */
+#cartes-stock .card {
+  position: relative;
+  overflow: hidden;
+}
+
+#cartes-stock .card::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='%232f4a3c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
