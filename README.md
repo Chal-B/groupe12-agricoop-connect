@@ -2,7 +2,9 @@
 
 Bienvenue dans votre startup. Ce dépôt est le **squelette** de l'application : un mini-site de 8 pages pour digitaliser la gestion de la coopérative COMAKI (authentification, membres, livraisons, paiements, ventes, stock, statistiques). La structure est déjà en place ; **votre équipe complète les fonctions manquantes et construit les pages**.
 
-Vous avez **quelques jours comme prevu dans le document** pour ce projet.
+> **Document de répartition des tâches (Semaine 8).** Ce README relie **chaque membre à ses tâches, ses fonctions et ses pages** : il sert de base à la **note individuelle**, tandis que le produit final dans son ensemble donne la **note collective**. Toute modification de la répartition doit être actée ici, avec l'accord de l'équipe.
+
+Vous avez **quelques jours comme prévu dans le document** pour ce projet.
 
 > Cette version intègre les résultats de l'analyse menée par les équipes Business Analyst à partir du cahier des charges COMAKI : un module d'authentification (la Secrétaire assure le rôle d'administratrice) et la création de nouveaux membres directement dans l'application.
 
@@ -12,7 +14,18 @@ Vous avez **quelques jours comme prevu dans le document** pour ce projet.
 
 ```bash
 cd backend
+
+# Créer l'environnement virtuel (une seule fois ; .venv existe déjà dans backend/)
+python -m venv .venv
+
+# Activer l'environnement
+.venv\Scripts\activate          # Windows
+# source .venv/bin/activate     # macOS / Linux
+
+# Installer les dépendances (dans l'environnement)
 pip install -r requirements.txt
+
+# Lancer l'API
 python app.py
 ```
 
@@ -49,7 +62,7 @@ Ouvrez simplement `frontend/login/login.html` dans votre navigateur (double-clic
 | Parcours | Effectif | Vous complétez | Vous ne touchez PAS |
 | --- | --- | --- | --- |
 | **Data Science** | 1 à 3 personnes | `backend/logic.py` (20 fonctions) | `app.py`, `controllers.py` |
-| **Full Stack** | >2 personnes | *voir répartition ci-dessous* | `main.js` |
+| **Full Stack** | 5 personnes | *voir répartition ci-dessous* | `main.js` |
 
 **Le nommage des champs est déjà fixé dans le code** (docstrings de `logic.py`, structure de `data/comaki.json`, IDs des éléments HTML). Vous n'avez pas à deviner ces noms — regardez les docstrings et le jeu de données pour comprendre le contrat technique attendu.
 
@@ -59,26 +72,46 @@ Chaque page est dans son propre sous-dossier avec son fichier CSS dédié. L'ess
 
 | Qui | Dossier & pages | Fonctions JS |
 | --- | --- | --- |
-| Dev FS1 | `frontend/login/login.html` **+** `frontend/dashboard/dashboard.html` | `validerFormulaireLogin`, `compterJoursActifs` |
-| Dev FS2 | `frontend/membres/membres.html` **+** `frontend/comptes/comptes.html` | `filtrerMembresParStatut`, `rechercherMembreParNom`, `validerFormulaireNouveauMembre` |
-| Dev FS3 | `frontend/livraisons/livraisons.html` | `validerFormulaireLivraison`, `trierLivraisonsParDate` |
-| Dev FS4 | `frontend/paiements/paiements.html` | `validerFormulairePaiement`, `calculerTotalPaiements` |
-| Dev FS5 | `frontend/ventes/ventes.html` | `getBadgeStock`, `formaterMontant` |
-| Dev FS6 | `frontend/statistiques/statistiques.html` | `trierClassementParVolume`, `formaterDate` |
+| **Espoir LOEMBA** | `frontend/login/login.html` **+** `frontend/dashboard/dashboard.html` | `validerFormulaireLogin`, `compterJoursActifs` |
+| **Grasty SAMBA DINAULT** | `frontend/membres/membres.html` **+** `frontend/comptes/comptes.html` | `filtrerMembresParStatut`, `rechercherMembreParNom`, `validerFormulaireNouveauMembre` |
+| **Beni NGASSA KI** | `frontend/livraisons/livraisons.html` | `validerFormulaireLivraison`, `trierLivraisonsParDate` |
+| **Dubien NGASSAI NDONG O** | `frontend/paiements/paiements.html` | `validerFormulairePaiement`, `calculerTotalPaiements` |
+| **Saint Chalbhery** | `frontend/ventes/ventes.html` **+** `frontend/statistiques/statistiques.html` **+** `frontend/index.html` (landing page) | `getBadgeStock`, `formaterMontant`, `trierClassementParVolume`, `formaterDate` |
 
 Chaque page contient des commentaires `<!-- TODO -->` indiquant le travail attendu, avec le layout, les éléments à construire et les classes déjà utilisées par `main.js` pour injecter le contenu dynamique. **Les éléments marqués "NE PAS MODIFIER" (IDs, scripts, formulaires) sont le câblage vers le backend — ne les changez pas, sinon les données ne s'afficheront plus.**
 
-**Nouveauté — page Login (Dev FS1) :** c'est la première page que tout le monde voit. Gardez-la volontairement simple : un formulaire centré, pas de navigation complexe.
+**Nouveauté — page Login (Espoir LOEMBA) :** c'est la première page que tout le monde voit. Gardez-la volontairement simple : un formulaire centré, pas de navigation complexe.
 
-**Nouveauté — page Comptes (Dev FS2) :** réservée à la Secrétaire. `main.js` vérifie automatiquement le rôle de la personne connectée (via `/api/verifier-acces`) et affiche un message de refus si ce n'est pas elle — vous n'avez rien à coder pour cette vérification, seulement à styliser les deux états (formulaire visible / message de refus).
+**Nouveauté — page Comptes (Grasty SAMBA DINAULT) :** réservée à la Secrétaire. `main.js` vérifie automatiquement le rôle de la personne connectée (via `/api/verifier-acces`) et affiche un message de refus si ce n'est pas elle — vous n'avez rien à coder pour cette vérification, seulement à styliser les deux états (formulaire visible / message de refus).
 
-**Nouveauté — formulaire Nouveau membre (Dev FS2, sur la page Membres) :** un formulaire à 4 champs (prénom, nom, village, contact) en bas de la page Membres existante.
+**Nouveauté — formulaire Nouveau membre (Grasty SAMBA DINAULT, sur la page Membres) :** un formulaire à 4 champs (prénom, nom, village, contact) en bas de la page Membres existante.
+
+**Landing page (Saint Chalbhery) :** `frontend/index.html` + `frontend/landing.css` réalisés seul, pour présenter AgriCoop Connect avant la connexion.
+
+## Répartition CSS (par membre)
+
+La feuille de style partagée `frontend/shared/` a été co-écrite : chaque dev possède **sa part** dans `components.css` (les sections sont signalées par `@author`), en plus du CSS de ses pages. Ce tableau liste **uniquement le travail CSS** de chacun.
+
+| Dev | CSS des pages | CSS partagé (`frontend/shared/`) |
+| --- | --- | --- |
+| **Espoir LOEMBA** | `login.css`, `dashboard.css` | `tokens.css`, `reset.css`, `layout.css`, `sidebar.css`, `motifs.css`, `main.css` + `components.css` : boutons, anneau de focus, graphique en barres `.graphique/.barre` |
+| **Grasty SAMBA DINAULT** | `membres.css`, `comptes.css` | `components.css` : formulaires & modales `.formulaire`, liste membres `.membre-ligne` |
+| **Beni NGASSA KI** | `livraisons.css` | `components.css` : badges, messages, tableaux, lignes de liste cliquables `.badge`, `.livraison-ligne` |
+| **Dubien NGASSAI NDONG O** | `paiements.css` | `components.css` : carte indicateur "total versé" `.carte-total` |
+| **Saint Chalbhery** | `ventes.css`, `statistiques.css`, **`landing.css`** (seul) | `components.css` : barres de stock `.barre-stock-*`, grille bento `.grille-bento` / `.bento-carte` |
 
 ## Équipe Data Science — workflow
 
 ```bash
 cd backend
+
+# Activer l'environnement
+.venv\Scripts\activate          # Windows
+# source .venv/bin/activate     # macOS / Linux
+
+# Installer les dépendances (une seule fois)
 pip install -r requirements.txt
+
 python -m pytest -v        # ROUGE au départ (39 tests)
 ```
 
@@ -86,6 +119,8 @@ Complétez `backend/logic.py` (20 fonctions réparties en **4 zones** — voir l
 
 - **2 Data Scientists** : Personne 1 = Zone A + Zone C (11 fonctions), Personne 2 = Zone B + Zone D (9 fonctions).
 - **3 Data Scientists** : Personne 1 = Zone A (6), Personne 2 = Zone B (7), Personne 3 = Zone C + D (7).
+
+> Auteur principal actuel de `logic.py` : **David Mbouyou** (à compléter avec les autres membres de l'équipe Data Science).
 
 Relancez les tests jusqu'au **VERT**.
 
