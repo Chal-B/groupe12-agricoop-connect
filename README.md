@@ -172,24 +172,24 @@ Ce document sert de base à la **note individuelle** ; le produit final donne la
 
 | Personne | Rôle |
 | --- | --- |
-| **Espoir** | Lead Projet + Lead Fullstack (+ Fullstack 1) |
+| **Espoir LOEMBA PACKA** | Lead Projet + Lead Fullstack (+ Fullstack 1) |
 | **MALONGA Saint Chalbhery** | Fullstack 5 et Repo Admin |
-| **Rude** | Product Owner |
-| **Emmanuelle** | Lead Business Analyst |
-| **Danielle** | Lead Marketing |
-| **Grasty** | Fullstack 2 |
-| **Beni** | Fullstack 3 |
-| **Dubien** | Fullstack 4 |
-| **David** | Lead Data |
+| **Rude Meillique MOUKIAMA** | Product Owner |
+| **Emmanuelle TCHAMBILA-SYLTHO** | Lead Business Analyst |
+| **Danielle Sacrée Surya LEMVO** | Lead Marketing |
+| **Grasty Ghyvet SAMBA DINAULT** | Fullstack 2 |
+| **Beni NGASSAKI** | Fullstack 3 |
+| **Dubien NGASSAI NDONGO** | Fullstack 4 |
+| **David MBOUYOU** | Lead Data |
 
 ### Répartition Fullstack (pages et fonctions JavaScript)
 
 | Développeur | Lot | Pages HTML | Fonctions JavaScript (`functions.js`) |
 | --- | --- | --- | --- |
-| **Espoir LOEMBA** | Fullstack 1 | `login/login.html` + `dashboard/dashboard.html` | `validerFormulaireLogin`, `compterJoursActifs` |
-| **Grasty SAMBA DINAULT** | Fullstack 2 | `membres/membres.html` + `comptes/comptes.html` | `filtrerMembresParStatut`, `rechercherMembreParNom`, `validerFormulaireNouveauMembre` |
-| **Beni NGASSA KI** | Fullstack 3 | `livraisons/livraisons.html` | `validerFormulaireLivraison`, `trierLivraisonsParDate` |
-| **Dubien NGASSAI NDONG O** | Fullstack 4 | `paiements/paiements.html` | `validerFormulairePaiement`, `calculerTotalPaiements` |
+| **Espoir LOEMBA PACKA** | Fullstack 1 | `login/login.html` + `dashboard/dashboard.html` | `validerFormulaireLogin`, `compterJoursActifs` |
+| **Grasty Ghyvet SAMBA DINAULT** | Fullstack 2 | `membres/membres.html` + `comptes/comptes.html` | `filtrerMembresParStatut`, `rechercherMembreParNom`, `validerFormulaireNouveauMembre` |
+| **Beni NGASSAKI** | Fullstack 3 | `livraisons/livraisons.html` | `validerFormulaireLivraison`, `trierLivraisonsParDate` |
+| **Dubien NGASSAI NDONGO** | Fullstack 4 | `paiements/paiements.html` | `validerFormulairePaiement`, `calculerTotalPaiements` |
 | **MALONGA Saint Chalbhery** | Fullstack 5 | `ventes/ventes.html` + `statistiques/statistiques.html` + `index.html` (landing) | `getBadgeStock`, `formaterMontant`, `trierClassementParVolume`, `formaterDate` |
 
 ### Répartition CSS
@@ -198,17 +198,17 @@ La feuille partagée `frontend/shared/` a été co-écrite ; chaque section de `
 
 | Développeur | CSS des pages | CSS partagé |
 | --- | --- | --- |
-| **Espoir LOEMBA** | `login.css`, `dashboard.css` | `tokens.css`, `reset.css`, `layout.css`, `sidebar.css`, `motifs.css`, `main.css` + `components.css` : boutons, focus, graphique `.graphique/.barre` |
-| **Grasty SAMBA DINAULT** | `membres.css`, `comptes.css` | `components.css` : formulaires & modales `.formulaire`, liste membres `.membre-ligne` |
-| **Beni NGASSA KI** | `livraisons.css` | `components.css` : badges, messages, tableaux, `.badge`, `.livraison-ligne` |
-| **Dubien NGASSAI NDONG O** | `paiements.css` | `components.css` : carte indicateur `.carte-total` |
+| **Espoir LOEMBA PACKA** | `login.css`, `dashboard.css` | `tokens.css`, `reset.css`, `layout.css`, `sidebar.css`, `motifs.css`, `main.css` + `components.css` : boutons, focus, graphique `.graphique/.barre` |
+| **Grasty Ghyvet SAMBA DINAULT** | `membres.css`, `comptes.css` | `components.css` : formulaires & modales `.formulaire`, liste membres `.membre-ligne` |
+| **Beni NGASSAKI** | `livraisons.css` | `components.css` : badges, messages, tableaux, `.badge`, `.livraison-ligne` |
+| **Dubien NGASSAI NDONGO** | `paiements.css` | `components.css` : carte indicateur `.carte-total` |
 | **MALONGA Saint Chalbhery** | `ventes.css`, `statistiques.css`, `landing.css` (seul) | `components.css` : barres de stock `.barre-stock-*`, grille bento `.grille-bento` / `.bento-carte` |
 
 ### Data Science
 
 Complétion des 20 fonctions de `backend/logic.py` (4 zones : indicateurs, membres, livraisons/paiements, ventes/statistiques).
 
-- Lead Data / auteur principal : **David Mbouyou**
+- Lead Data / auteur principal : **David MBOUYOU**
 
 ## Contraintes techniques respectées
 
