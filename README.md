@@ -1,12 +1,13 @@
 # AgriCoop Connect — Coopérative COMAKI, Kintélé
 
-Bienvenue dans votre startup. Ce dépôt est le **squelette** de l'application : un mini-site de 8 pages pour digitaliser la gestion de la coopérative COMAKI (authentification, membres, livraisons, paiements, ventes, stock, statistiques). La structure est déjà en place ; **votre équipe complète les fonctions manquantes et construit les pages**.
+**AgriCoop Connect** est l'outil de gestion interne de la coopérative agricole **COMAKI** (Kintélé, Brazzaville). Il digitalise le suivi des membres, des livraisons, des paiements, du stock, des ventes et des statistiques, avec un module d'authentification par rôle (Secrétaire administratrice, Président, Trésorière, Responsable dépôt, Membre).
 
-> **Document de répartition des tâches (Semaine 8).** Ce README relie **chaque membre à ses tâches, ses fonctions et ses pages** : il sert de base à la **note individuelle**, tandis que le produit final dans son ensemble donne la **note collective**. Toute modification de la répartition doit être actée ici, avec l'accord de l'équipe.
+Le projet est livré en deux volets :
 
-Vous avez **quelques jours comme prévu dans le document** pour ce projet.
+- **Landing publique COMAKI** (`frontend/index.html`) — vitrine à destination des acheteurs et revendeurs, avec prise de contact WhatsApp.
+- **Application interne AgriCoop Connect** (`frontend/login/login.html` puis 7 pages) — outil réservé aux membres de la coopérative, accessible après connexion.
 
-> Cette version intègre les résultats de l'analyse menée par les équipes Business Analyst à partir du cahier des charges COMAKI : un module d'authentification (la Secrétaire assure le rôle d'administratrice) et la création de nouveaux membres directement dans l'application.
+Backend : API Flask (`backend/`) — Frontend : HTML / CSS / JavaScript pur, sans framework.
 
 ## Aperçu
 
@@ -14,9 +15,25 @@ Vous avez **quelques jours comme prévu dans le document** pour ce projet.
 
 ![Tableau de bord d'AgriCoop Connect](docs/apercu-tableau-de-bord.png)
 
-**Gestion des comptes** — écran réservé à la Secrétaire, avec la liste des comptes et leurs rôles.
+**Gestion des comptes** — écran réservé à la Secrétaire, avec la liste des comptes utilisateurs et leurs rôles.
 
 ![Gestion des comptes d'AgriCoop Connect](docs/apercu-comptes.png)
+
+## Fonctionnalités livrées
+
+| Module | Ce qui est disponible |
+| --- | --- |
+| **Landing COMAKI** | Vitrine publique, présentation de l'offre, témoignages, contact WhatsApp |
+| **Authentification** | Connexion par nom d'utilisateur + mot de passe, contrôle d'accès par rôle |
+| **Tableau de bord** | Indicateurs globaux, activité de la semaine, dernières livraisons |
+| **Membres** | Liste, filtrage par statut de cotisation, recherche, création d'un nouveau membre |
+| **Livraisons** | Historique complet, enregistrement d'une nouvelle livraison, tri par date |
+| **Paiements** | Historique, total versé, enregistrement d'un nouveau paiement |
+| **Ventes & Stock** | Cartes de stock disponible, historique des ventes |
+| **Statistiques** | Classement des producteurs, statistiques par culture, top acheteur, rapport partenaire (anonymisé) |
+| **Comptes** | Gestion des utilisateurs — réservée à la Secrétaire |
+
+Toutes les règles métier RM-1 à RM-7 (voir plus bas) sont appliquées côté backend.
 
 ## Lancer le projet en local
 
@@ -25,31 +42,30 @@ Vous avez **quelques jours comme prévu dans le document** pour ce projet.
 ```bash
 cd backend
 
-# Créer l'environnement virtuel (une seule fois ; .venv existe déjà dans backend/)
+# Créer l'environnement virtuel (une seule fois)
 python -m venv .venv
 
 # Activer l'environnement
 .venv\Scripts\activate          # Windows
 # source .venv/bin/activate     # macOS / Linux
 
-# Installer les dépendances (dans l'environnement)
+# Installer les dépendances
 pip install -r requirements.txt
 
 # Lancer l'API
 python app.py
 ```
 
-L'API tourne sur `http://localhost:5000`. Laissez ce terminal ouvert tout le temps où vous travaillez.
+L'API tourne sur `http://localhost:5000`.
 
 **2. Ouvrir le site**
 
-Ouvrez simplement `frontend/login/login.html` dans votre navigateur (double-clic, ou clic droit → ouvrir avec votre navigateur).
+- Application interne : `frontend/login/login.html`
+- Landing publique : `frontend/index.html`
 
-**Si vous utilisez VS Code, l'extension Live Server fonctionne aussi très bien** (clic droit sur le fichier HTML → "Open with Live Server").
+Double-clic sur le fichier, ou clic droit → **Open with Live Server** (VS Code).
 
-**C'est tout : un seul terminal pour l'API, et vous ouvrez vos pages HTML directement.** Tant que `python app.py` tourne, n'importe quelle page du site peut appeler l'API normalement.
-
-### Comptes de test (module Authentification)
+### Comptes de test
 
 | Rôle | Nom d'utilisateur | Mot de passe |
 | --- | --- | --- |
@@ -59,125 +75,55 @@ Ouvrez simplement `frontend/login/login.html` dans votre navigateur (double-clic
 | Responsable dépôt | `jmabiala` | `Depot2026` |
 | Membre | `ankounkou` | `Membre2026` |
 
-**Attention pédagogique :** ces mots de passe sont stockés en clair dans `data/comaki.json`, volontairement, parce que ce projet porte sur la logique métier (qui a le droit de faire quoi) et non sur la cryptographie. Ce n'est **pas** une pratique à reproduire dans un vrai projet — un vrai système hasherait les mots de passe. C'est un choix de simplification assumé pour rester dans le niveau du cours.
+> Les mots de passe sont volontairement stockés en clair dans `backend/data/comaki.json` : ce projet porte sur la logique métier et le contrôle d'accès par rôle, pas sur la cryptographie. En production, ces mots de passe seraient hashés.
 
-### Si une page ne s'affiche pas comme attendu
+## Structure du dépôt
 
-- **Une carte ou une section reste vide** : c'est normal si la fonction Python ou JavaScript correspondante n'est pas encore codée. Les autres sections de la page continuent de s'afficher normalement — seule la section concernée reste vide en attendant votre code.
-- **Un message d'erreur apparaît sur la page** : lisez-le, il indique quelle fonction regarder. Le détail technique complet (traceback Python) est toujours visible dans le terminal où tourne `python app.py`.
-- **Rien ne s'affiche du tout** : vérifiez d'abord que le terminal de l'API est bien ouvert et actif (pas d'erreur affichée dedans). Si vous venez de modifier `main.js` ou `functions.js`, faites un rafraîchissement forcé de la page (Ctrl+Maj+R ou Cmd+Maj+R) — le navigateur met parfois en cache l'ancienne version du fichier.
+```
+groupe12-agricoop-connect/
+├── backend/
+│   ├── app.py              Routes Flask (ne pas modifier)
+│   ├── controllers.py      Orchestration (ne pas modifier)
+│   ├── logic.py            20 fonctions métier — Data Science
+│   ├── data/comaki.json    Jeu de données unique
+│   └── tests/              Tests pytest
+├── frontend/
+│   ├── index.html          Landing publique COMAKI
+│   ├── landing.css
+│   ├── main.js             Câblage API + DOM (ne pas modifier)
+│   ├── functions.js        13 fonctions pures — Full Stack
+│   ├── functions.test.html Tests JS
+│   ├── login/              Application interne — page de connexion
+│   ├── dashboard/          Tableau de bord
+│   ├── membres/            Gestion des membres
+│   ├── livraisons/         Suivi des livraisons
+│   ├── paiements/          Suivi des paiements
+│   ├── ventes/             Ventes & stock
+│   ├── statistiques/       Statistiques & rapport partenaire
+│   ├── comptes/            Gestion des comptes (Secrétaire)
+│   ├── shared/             CSS partagé (tokens, layout, composants, sidebar…)
+│   └── images/             Médias de la landing
+├── docs/                   Captures pour le README
+└── README.md
+```
 
-## Qui fait quoi
+## Tests
 
-| Parcours | Effectif | Vous complétez | Vous ne touchez PAS |
-| --- | --- | --- | --- |
-| **Data Science** | 1 à 3 personnes | `backend/logic.py` (20 fonctions) | `app.py`, `controllers.py` |
-| **Full Stack** | 5 personnes | *voir répartition ci-dessous* | `main.js` |
+Le projet est livré **tests au vert**.
 
-**Le nommage des champs est déjà fixé dans le code** (docstrings de `logic.py`, structure de `data/comaki.json`, IDs des éléments HTML). Vous n'avez pas à deviner ces noms — regardez les docstrings et le jeu de données pour comprendre le contrat technique attendu.
-
-## Répartition Full Stack
-
-Chaque page est dans son propre sous-dossier avec son fichier CSS dédié. L'essentiel de votre note porte sur vos **pages HTML/CSS** (structure sémantique, box model, Flexbox/Grid, responsive mobile/tablette/desktop). Chacun complète aussi 2 à 3 fonctions JS dans `frontend/functions.js`.
-
-| Qui | Dossier & pages | Fonctions JS |
-| --- | --- | --- |
-| **Espoir LOEMBA** | `frontend/login/login.html` **+** `frontend/dashboard/dashboard.html` | `validerFormulaireLogin`, `compterJoursActifs` |
-| **Grasty SAMBA DINAULT** | `frontend/membres/membres.html` **+** `frontend/comptes/comptes.html` | `filtrerMembresParStatut`, `rechercherMembreParNom`, `validerFormulaireNouveauMembre` |
-| **Beni NGASSA KI** | `frontend/livraisons/livraisons.html` | `validerFormulaireLivraison`, `trierLivraisonsParDate` |
-| **Dubien NGASSAI NDONG O** | `frontend/paiements/paiements.html` | `validerFormulairePaiement`, `calculerTotalPaiements` |
-| **Saint Chalbhery** | `frontend/ventes/ventes.html` **+** `frontend/statistiques/statistiques.html` **+** `frontend/index.html` (landing page) | `getBadgeStock`, `formaterMontant`, `trierClassementParVolume`, `formaterDate` |
-
-Chaque page contient des commentaires `<!-- TODO -->` indiquant le travail attendu, avec le layout, les éléments à construire et les classes déjà utilisées par `main.js` pour injecter le contenu dynamique. **Les éléments marqués "NE PAS MODIFIER" (IDs, scripts, formulaires) sont le câblage vers le backend — ne les changez pas, sinon les données ne s'afficheront plus.**
-
-**Nouveauté — page Login (Espoir LOEMBA) :** c'est la première page que tout le monde voit. Gardez-la volontairement simple : un formulaire centré, pas de navigation complexe.
-
-**Nouveauté — page Comptes (Grasty SAMBA DINAULT) :** réservée à la Secrétaire. `main.js` vérifie automatiquement le rôle de la personne connectée (via `/api/verifier-acces`) et affiche un message de refus si ce n'est pas elle — vous n'avez rien à coder pour cette vérification, seulement à styliser les deux états (formulaire visible / message de refus).
-
-**Nouveauté — formulaire Nouveau membre (Grasty SAMBA DINAULT, sur la page Membres) :** un formulaire à 4 champs (prénom, nom, village, contact) en bas de la page Membres existante.
-
-**Landing page (Saint Chalbhery) :** `frontend/index.html` + `frontend/landing.css` réalisés seul, pour présenter AgriCoop Connect avant la connexion.
-
-## Répartition CSS (par membre)
-
-La feuille de style partagée `frontend/shared/` a été co-écrite : chaque dev possède **sa part** dans `components.css` (les sections sont signalées par `@author`), en plus du CSS de ses pages. Ce tableau liste **uniquement le travail CSS** de chacun.
-
-| Dev | CSS des pages | CSS partagé (`frontend/shared/`) |
-| --- | --- | --- |
-| **Espoir LOEMBA** | `login.css`, `dashboard.css` | `tokens.css`, `reset.css`, `layout.css`, `sidebar.css`, `motifs.css`, `main.css` + `components.css` : boutons, anneau de focus, graphique en barres `.graphique/.barre` |
-| **Grasty SAMBA DINAULT** | `membres.css`, `comptes.css` | `components.css` : formulaires & modales `.formulaire`, liste membres `.membre-ligne` |
-| **Beni NGASSA KI** | `livraisons.css` | `components.css` : badges, messages, tableaux, lignes de liste cliquables `.badge`, `.livraison-ligne` |
-| **Dubien NGASSAI NDONG O** | `paiements.css` | `components.css` : carte indicateur "total versé" `.carte-total` |
-| **Saint Chalbhery** | `ventes.css`, `statistiques.css`, **`landing.css`** (seul) | `components.css` : barres de stock `.barre-stock-*`, grille bento `.grille-bento` / `.bento-carte` |
-
-## Équipe Data Science — workflow
+**Backend (39 tests pytest)**
 
 ```bash
 cd backend
-
-# Activer l'environnement
-.venv\Scripts\activate          # Windows
-# source .venv/bin/activate     # macOS / Linux
-
-# Installer les dépendances (une seule fois)
-pip install -r requirements.txt
-
-python -m pytest -v        # ROUGE au départ (39 tests)
+.venv\Scripts\activate
+python -m pytest -v
 ```
 
-Complétez `backend/logic.py` (20 fonctions réparties en **4 zones** — voir les commentaires de section dans le fichier). Répartition suggérée :
+**Frontend (25 tests unitaires)**
 
-- **2 Data Scientists** : Personne 1 = Zone A + Zone C (11 fonctions), Personne 2 = Zone B + Zone D (9 fonctions).
-- **3 Data Scientists** : Personne 1 = Zone A (6), Personne 2 = Zone B (7), Personne 3 = Zone C + D (7).
+Ouvrir `frontend/functions.test.html` dans le navigateur.
 
-> Auteur principal actuel de `logic.py` : **David Mbouyou** (à compléter avec les autres membres de l'équipe Data Science).
-
-Relancez les tests jusqu'au **VERT**.
-
-Pour vérifier vos résultats via l'API une fois les tests au vert, lancez `python app.py` (voir "Lancer le projet en local" ci-dessus) puis testez dans le navigateur :
-
-```
-http://localhost:5000/api/dashboard
-http://localhost:5000/api/membres
-http://localhost:5000/api/livraisons
-http://localhost:5000/api/paiements
-http://localhost:5000/api/ventes-stock
-http://localhost:5000/api/statistiques
-http://localhost:5000/api/rapport-bailleur
-http://localhost:5000/api/utilisateurs
-http://localhost:5000/api/villages
-```
-
-Pour les routes qui exigent un envoi de données (POST), testez avec `curl` ou l'onglet Réseau du navigateur une fois le formulaire correspondant construit par l'équipe Full Stack — par exemple :
-
-```bash
-curl -X POST http://localhost:5000/api/login \
-  -H "Content-Type: application/json" \
-  -d '{"nom_utilisateur":"smalonga","mot_de_passe":"Secretaire2026"}'
-```
-
-## Équipe Full Stack — workflow
-
-1. Ouvrez `frontend/functions.test.html` dans le navigateur → **ROUGE au départ** (25 tests).
-2. Complétez vos fonctions dans `frontend/functions.js`.
-3. Construisez vos pages HTML/CSS dans votre/vos sous-dossier(s).
-4. Pour voir le rendu de votre page connectée aux vraies données, suivez la section "Lancer le projet en local" ci-dessus (backend démarré, puis ouvrez simplement votre fichier HTML).
-
-## La règle d'or (JS)
-
-Vous n'écrivez que des **fonctions pures** : des paramètres entrent, une valeur sort (`return`). Pas de réseau, pas de DOM — tout ça est déjà branché dans `main.js`. Votre note JS reste secondaire face à vos pages.
-
-## Le jeu de données
-
-`backend/data/comaki.json` contient :
-
-- 8 membres (avec nom, village, contact) — 25 livraisons (avril-juillet 2026) — 8 paiements (avec mode de paiement) — 3 acheteurs — 9 ventes
-- 5 comptes utilisateurs (module Authentification)
-- 6 villages de référence (pour le formulaire Nouveau membre)
-
-C'est la source unique de vérité : ne modifiez pas ce fichier, sinon vos résultats ne correspondront plus à ceux calculés par les autres personnes de l'équipe.
-
-## Règles métier à connaître
+## Règles métier
 
 | Règle | Description |
 | --- | --- |
@@ -186,11 +132,82 @@ C'est la source unique de vérité : ne modifiez pas ce fichier, sinon vos résu
 | RM-3 | Un paiement ne peut jamais dépasser le solde restant dû à un membre. |
 | RM-4 | Une vente ne peut jamais dépasser le stock disponible. |
 | RM-5 | Le rapport partenaire ne contient jamais de donnée nominative (aucun nom de membre). |
-| RM-6 | Un utilisateur ne peut accéder qu'aux actions autorisées pour son rôle (module Authentification). |
+| RM-6 | Un utilisateur ne peut accéder qu'aux actions autorisées pour son rôle. |
 | RM-7 | Un doublon quasi certain de membre propose la fiche existante plutôt que d'en créer une nouvelle. |
 
-## Livrable & soutenance (Demo Day)
+## Jeu de données
 
-Votre équipe pitche son produit comme une vraie startup : démo live (connexion avec un compte de test, navigation sur les 8 pages, enregistrement d'une vraie livraison et d'un vrai paiement, création d'un nouveau membre), avec explication des règles métier respectées.
+`backend/data/comaki.json` — source unique de vérité :
 
-Bonne construction.
+- 8 membres — 25 livraisons (avril à juillet 2026) — 8 paiements — 3 acheteurs — 9 ventes
+- 5 comptes utilisateurs
+- 6 villages de référence
+
+## Routes API
+
+```
+GET  /api/dashboard
+GET  /api/membres              POST /api/membres
+GET  /api/membres/<id>
+GET  /api/livraisons           POST /api/livraisons
+GET  /api/paiements            POST /api/paiements
+GET  /api/ventes-stock         POST /api/ventes-stock
+GET  /api/statistiques
+GET  /api/rapport-bailleur
+GET  /api/utilisateurs         POST /api/utilisateurs
+GET  /api/villages
+POST /api/login
+POST /api/verifier-acces
+```
+
+## Équipe & répartition des tâches
+
+Ce document sert de base à la **note individuelle** ; le produit final donne la **note collective**.
+
+### Full Stack
+
+| Développeur | Pages HTML | Fonctions JS (`functions.js`) |
+| --- | --- | --- |
+| **Espoir LOEMBA** | `login/login.html` + `dashboard/dashboard.html` | `validerFormulaireLogin`, `compterJoursActifs` |
+| **Grasty SAMBA DINAULT** | `membres/membres.html` + `comptes/comptes.html` | `filtrerMembresParStatut`, `rechercherMembreParNom`, `validerFormulaireNouveauMembre` |
+| **Beni NGASSA KI** | `livraisons/livraisons.html` | `validerFormulaireLivraison`, `trierLivraisonsParDate` |
+| **Dubien NGASSAI NDONG O** | `paiements/paiements.html` | `validerFormulairePaiement`, `calculerTotalPaiements` |
+| **Saint Chalbhery MALONGA** | `ventes/ventes.html` + `statistiques/statistiques.html` + `index.html` (landing) | `getBadgeStock`, `formaterMontant`, `trierClassementParVolume`, `formaterDate` |
+
+### Répartition CSS
+
+La feuille partagée `frontend/shared/` a été co-écrite ; chaque section de `components.css` est signée `@author`.
+
+| Développeur | CSS des pages | CSS partagé |
+| --- | --- | --- |
+| **Espoir LOEMBA** | `login.css`, `dashboard.css` | `tokens.css`, `reset.css`, `layout.css`, `sidebar.css`, `motifs.css`, `main.css` + `components.css` : boutons, focus, graphique `.graphique/.barre` |
+| **Grasty SAMBA DINAULT** | `membres.css`, `comptes.css` | `components.css` : formulaires & modales `.formulaire`, liste membres `.membre-ligne` |
+| **Beni NGASSA KI** | `livraisons.css` | `components.css` : badges, messages, tableaux, `.badge`, `.livraison-ligne` |
+| **Dubien NGASSAI NDONG O** | `paiements.css` | `components.css` : carte indicateur `.carte-total` |
+| **Saint Chalbhery MALONGA** | `ventes.css`, `statistiques.css`, `landing.css` (seul) | `components.css` : barres de stock `.barre-stock-*`, grille bento `.grille-bento` / `.bento-carte` |
+
+### Data Science
+
+Complétion des 20 fonctions de `backend/logic.py` (4 zones : indicateurs, membres, livraisons/paiements, ventes/statistiques).
+
+- Auteur principal : **David Mbouyou**
+
+## Contraintes techniques respectées
+
+- **`main.js` et `app.py` / `controllers.py`** : non modifiés (contrat pédagogique).
+- **`functions.js`** : uniquement des fonctions pures (paramètres → `return`), sans réseau ni DOM.
+- **`backend/data/comaki.json`** : source de vérité unique, non modifiée.
+- **IDs et formulaires marqués « NE PAS MODIFIER »** : préservés pour garantir le câblage backend.
+
+## Démo (soutenance)
+
+Scénario type :
+
+1. Ouvrir la **landing** `frontend/index.html` — présentation publique de COMAKI.
+2. Ouvrir l'**application** `frontend/login/login.html` et se connecter avec `smalonga` / `Secretaire2026`.
+3. Naviguer sur les 8 pages.
+4. Créer un nouveau membre.
+5. Enregistrer une livraison, puis un paiement.
+6. Montrer le tableau de bord, les ventes, les statistiques et le rapport partenaire (anonymisé, RM-5).
+
+Bonne visite.
