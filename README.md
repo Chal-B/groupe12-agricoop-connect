@@ -11,6 +11,10 @@ Backend : API Flask (`backend/`) — Frontend : HTML / CSS / JavaScript pur, san
 
 ## Aperçu
 
+**Landing publique COMAKI** — vitrine destinée aux acheteurs et revendeurs.
+
+![Landing publique COMAKI](docs/apercu-landing-comaki.png)
+
 **Tableau de bord** — indicateurs de la coopérative, activité de la semaine et dernières livraisons.
 
 ![Tableau de bord d'AgriCoop Connect](docs/apercu-tableau-de-bord.png)
