@@ -162,6 +162,7 @@ table {
 .zone-nouveau-compte,
 .zone-nouvelle-livraison,
 .zone-nouveau-paiement,
+.zone-nouvelle-vente,
 .filtres {
   display: flex;
   flex-wrap: wrap;
@@ -169,11 +170,12 @@ table {
   gap: var(--espace-base);
 }
 
-/* Zone titre + bouton d'ajout (partagée par membres/comptes/livraisons/paiements) */
+/* Zone titre + bouton d'ajout (partagée par membres/comptes/livraisons/paiements/ventes) */
 .zone-nouveau-membre,
 .zone-nouveau-compte,
 .zone-nouvelle-livraison,
-.zone-nouveau-paiement {
+.zone-nouveau-paiement,
+.zone-nouvelle-vente {
   align-items: flex-end;
   margin-bottom: var(--espace-2xl);
 
