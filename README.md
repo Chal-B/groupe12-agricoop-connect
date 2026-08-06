@@ -8,6 +8,16 @@ Vous avez **quelques jours comme prévu dans le document** pour ce projet.
 
 > Cette version intègre les résultats de l'analyse menée par les équipes Business Analyst à partir du cahier des charges COMAKI : un module d'authentification (la Secrétaire assure le rôle d'administratrice) et la création de nouveaux membres directement dans l'application.
 
+## Aperçu
+
+**Tableau de bord** — indicateurs de la coopérative, activité de la semaine et dernières livraisons.
+
+![Tableau de bord d'AgriCoop Connect](docs/apercu-tableau-de-bord.png)
+
+**Gestion des comptes** — écran réservé à la Secrétaire, avec la liste des comptes et leurs rôles.
+
+![Gestion des comptes d'AgriCoop Connect](docs/apercu-comptes.png)
+
 ## Lancer le projet en local
 
 **1. Démarrer l'API (un seul terminal, à laisser ouvert)**
