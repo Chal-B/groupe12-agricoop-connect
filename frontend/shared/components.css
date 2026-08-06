@@ -625,7 +625,7 @@ tbody tr:hover {
 
 /**
  * Barres de stock (main.js génère les .barre-stock-*)
- * @author Saint Chalbher y (Dev FS5)
+ * @author Saint Chalbhery (Dev FS5)
  */
 .barre-stock-fond {
   height: 8px;
@@ -664,7 +664,7 @@ tbody tr:hover {
 
 /**
  * Grille bento & carte bento (base du classement/rapport des statistiques)
- * @author Saint Chalbher y (Dev FS6)
+ * @author Saint Chalbhery (Dev FS6)
  */
 .grille-bento {
   display: grid;
