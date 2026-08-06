@@ -95,8 +95,8 @@ groupe12-agricoop-connect/
 │   ├── index.html          Landing publique COMAKI
 │   ├── landing.css
 │   ├── main.js             Câblage API + DOM (ne pas modifier)
-│   ├── functions.js        13 fonctions pures — Full Stack
-│   ├── functions.test.html Tests JS
+│   ├── functions.js        13 fonctions pures — Fullstack
+│   ├── functions.test.html Tests JavaScript
 │   ├── login/              Application interne — page de connexion
 │   ├── dashboard/          Tableau de bord
 │   ├── membres/            Gestion des membres
@@ -168,15 +168,29 @@ POST /api/verifier-acces
 
 Ce document sert de base à la **note individuelle** ; le produit final donne la **note collective**.
 
-### Full Stack
+### Rôles de l'équipe
 
-| Développeur | Pages HTML | Fonctions JS (`functions.js`) |
-| --- | --- | --- |
-| **Espoir LOEMBA** | `login/login.html` + `dashboard/dashboard.html` | `validerFormulaireLogin`, `compterJoursActifs` |
-| **Grasty SAMBA DINAULT** | `membres/membres.html` + `comptes/comptes.html` | `filtrerMembresParStatut`, `rechercherMembreParNom`, `validerFormulaireNouveauMembre` |
-| **Beni NGASSA KI** | `livraisons/livraisons.html` | `validerFormulaireLivraison`, `trierLivraisonsParDate` |
-| **Dubien NGASSAI NDONG O** | `paiements/paiements.html` | `validerFormulairePaiement`, `calculerTotalPaiements` |
-| **Saint Chalbhery MALONGA** | `ventes/ventes.html` + `statistiques/statistiques.html` + `index.html` (landing) | `getBadgeStock`, `formaterMontant`, `trierClassementParVolume`, `formaterDate` |
+| Personne | Rôle |
+| --- | --- |
+| **Espoir** | Lead Projet + Lead Fullstack (+ Fullstack 1) |
+| **MALONGA Saint Chalbhery** | Fullstack 5 et Repo Admin |
+| **Rude** | Product Owner |
+| **Emmanuelle** | Lead Business Analyst |
+| **Danielle** | Lead Marketing |
+| **Grasty** | Fullstack 2 |
+| **Beni** | Fullstack 3 |
+| **Dubien** | Fullstack 4 |
+| **David** | Lead Data |
+
+### Répartition Fullstack (pages et fonctions JavaScript)
+
+| Développeur | Lot | Pages HTML | Fonctions JavaScript (`functions.js`) |
+| --- | --- | --- | --- |
+| **Espoir LOEMBA** | Fullstack 1 | `login/login.html` + `dashboard/dashboard.html` | `validerFormulaireLogin`, `compterJoursActifs` |
+| **Grasty SAMBA DINAULT** | Fullstack 2 | `membres/membres.html` + `comptes/comptes.html` | `filtrerMembresParStatut`, `rechercherMembreParNom`, `validerFormulaireNouveauMembre` |
+| **Beni NGASSA KI** | Fullstack 3 | `livraisons/livraisons.html` | `validerFormulaireLivraison`, `trierLivraisonsParDate` |
+| **Dubien NGASSAI NDONG O** | Fullstack 4 | `paiements/paiements.html` | `validerFormulairePaiement`, `calculerTotalPaiements` |
+| **MALONGA Saint Chalbhery** | Fullstack 5 | `ventes/ventes.html` + `statistiques/statistiques.html` + `index.html` (landing) | `getBadgeStock`, `formaterMontant`, `trierClassementParVolume`, `formaterDate` |
 
 ### Répartition CSS
 
@@ -188,13 +202,13 @@ La feuille partagée `frontend/shared/` a été co-écrite ; chaque section de `
 | **Grasty SAMBA DINAULT** | `membres.css`, `comptes.css` | `components.css` : formulaires & modales `.formulaire`, liste membres `.membre-ligne` |
 | **Beni NGASSA KI** | `livraisons.css` | `components.css` : badges, messages, tableaux, `.badge`, `.livraison-ligne` |
 | **Dubien NGASSAI NDONG O** | `paiements.css` | `components.css` : carte indicateur `.carte-total` |
-| **Saint Chalbhery MALONGA** | `ventes.css`, `statistiques.css`, `landing.css` (seul) | `components.css` : barres de stock `.barre-stock-*`, grille bento `.grille-bento` / `.bento-carte` |
+| **MALONGA Saint Chalbhery** | `ventes.css`, `statistiques.css`, `landing.css` (seul) | `components.css` : barres de stock `.barre-stock-*`, grille bento `.grille-bento` / `.bento-carte` |
 
 ### Data Science
 
 Complétion des 20 fonctions de `backend/logic.py` (4 zones : indicateurs, membres, livraisons/paiements, ventes/statistiques).
 
-- Auteur principal : **David Mbouyou**
+- Lead Data / auteur principal : **David Mbouyou**
 
 ## Contraintes techniques respectées
 
